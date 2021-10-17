@@ -1,0 +1,25 @@
+{
+  "name": "playwright",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.15.2",
+    "allure-commandline": "^2.13.8"
+  },
+  "devDependencies": {
+    "allure-playwright": "^2.0.0-beta.13"
+  },
+  "scripts": {
+    "pw": "npx playwright test",
+    "allure": "allure generate ./allure-results --clean && allure open ./allure-report"
+  },
+  "keywords": [
+    "playwright"
+  ],
+  "author": "Suleman Shaiakhmedov",
+  "license": "ISC"
+}
