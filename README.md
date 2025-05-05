@@ -53,6 +53,10 @@ which generates `allure-results` folder and spin up the server with the last run
 - [Allure](https://expressjs.com/) - Custom Reporter
 
 #
+## Setting up AWS CodeBuild + GitHub
+- TBD
+
+#
 ## AWS CodeBuild
 - it runs on github actions - Pull Requests and commits
 - can run with overrides in AWS Console
