@@ -54,7 +54,8 @@ which generates `allure-results` folder and spin up the server with the last run
 
 #
 ## Setting up AWS CodeBuild + GitHub
-- TBD
+- got CodeBuild and create porject
+  - connect github (prior create toket n under GitHub/Settings/Developer/Fine-grained tokem)
 
 #
 ## AWS CodeBuild
