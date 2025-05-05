@@ -12,3 +12,4 @@ phases:
       - npm run pw
   post_build:
     commands:
+      - echo "How are you"
