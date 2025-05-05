@@ -51,4 +51,8 @@ which generates `allure-results` folder and spin up the server with the last run
 - [Playwright](https://www.mongodb.com/) - e2e Framework
 - [Allure](https://expressjs.com/) - Custom Reporter
 
+# AWS CodeBuild
+- it runs on github actions - Pull Requests and commits
+- can run with overrides in AWS Console
+
 
