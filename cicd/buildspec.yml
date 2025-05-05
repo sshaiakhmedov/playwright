@@ -12,4 +12,3 @@ phases:
       - npm run pw
   post_build:
     commands:
-      - SUCCESS=$CODEBUILD_BUILD_SUCCEEDING node ./bin/notify.js
