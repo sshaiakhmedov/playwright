@@ -1,15 +1,15 @@
 version: 0.2
 
 phases:
- install:
-  runtime-versions:
-   nodejs: 20
-  commands:
-   - git checkout master
-   - npm install
-build:
-  commands:
-   - npm run pw
-post_build:
-  commands:
-   SUCCESS=$CODEBUILD_BUILD_SUCCEEDING node ./bin/notify.js
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - git checkout master
+      - npm install
+  build:
+    commands:
+      - npm run pw
+  post_build:
+    commands:
+      - SUCCESS=$CODEBUILD_BUILD_SUCCEEDING node ./bin/notify.js
