@@ -12,9 +12,6 @@ phases:
 build:
   commands:
    - npm run pw
-   - npm run build
-   - pip3 install awscli --upgrade --user
-   - aws s3 sync $BUILD_DIR s3://$S3_BUCKET --acl public-read
 post_build:
   commands:
    SUCCESS=$CODEBUILD_BUILD_SUCCEEDING node ./bin/notify.js
