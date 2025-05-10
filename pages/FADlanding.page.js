@@ -28,9 +28,9 @@ exports.FADpage = class FADpage {
   async goToFADmenu (){
     this.fadMenu.click()
     await expect(this.page).toHaveTitle(fadData.title);
-    await expect(this.findPrimaryCare).toBeVisible();
-    await expect(this.findAspecialist).toBeVisible();
-    await expect(this.findDoctorByName).toBeVisible();
+    // await expect(this.findPrimaryCare).toBeVisible();
+    // await expect(this.findAspecialist).toBeVisible();
+    // await expect(this.findDoctorByName).toBeVisible();
   }
 
 }

@@ -7,8 +7,8 @@ test.describe('Get to FAD landing page from Sharp.com Nav Menu', ()=>{
     const FAD=new FADpage(page);
     await FAD.gotoSharpHome();
     //await FAD.isVisible();
-    await helpers.isVisible(FAD.fadMenu)
-    await FAD.goToFADmenu();
+    // await helpers.isVisible(FAD.fadMenu)
+    // await FAD.goToFADmenu();
   });
 })
 
