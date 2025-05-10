@@ -12,6 +12,8 @@ const config = {
   /*Put any shared options on the top level.
   use - is the top global level unles overwritten */
   use: {
+    browserName: 'chromium',
+    channel: 'chrome',
 
     // Configure browser and context here
     headless: process.env.CI ? true : false, // Run headless in CI
