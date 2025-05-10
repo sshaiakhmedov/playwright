@@ -9,12 +9,12 @@ phases:
       - npm install
   build:
     commands:
-      - npm run pw
-  post_build:
-    commands:
       - echo "Node.js version:"
       - node --version
       - echo "Playwright installation check:"
       - npx playwright install
       - echo "Running Playwright tests:"
       - npx playwright test
+  post_build:
+    commands:
+      - echo "we are done"
