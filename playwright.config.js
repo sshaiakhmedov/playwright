@@ -3,7 +3,7 @@
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
 const config = {
   // Limit the number of workers on CI, use default locally
-  workers: process.env.CI ? 2 : undefined,
+  workers: process.env.CI ? 2 : 1,
 
   // Use multiple reporters
   reporter: [
@@ -14,7 +14,7 @@ const config = {
   /* Shared options */
   use: {
     browserName: 'chromium',
-    headless: process.env.CI? true : false,
+    headless: true,
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
     video: 'on-first-retry',
