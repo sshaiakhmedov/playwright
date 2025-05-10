@@ -12,7 +12,7 @@ phases:
       - echo "Node.js version:"
       - node --version
       - echo "Playwright installation check:"
-      - npx playwright install
+      - npx playwright install-deps
       - echo "Running Playwright tests:"
       - npx playwright test
   post_build:
