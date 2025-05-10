@@ -3,7 +3,7 @@
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
 const config = {
   // Limit the number of workers on CI, use default locally
-  workers: process.env.CI?2:1,
+  workers: 1,
   // Default reporter
   reporter: 'allure-playwright',
   // Custom reporter
@@ -16,7 +16,7 @@ const config = {
     channel: 'chrome',
 
     // Configure browser and context here
-    headless: process.env.CI ? true : false, // Run headless in CI
+    headless: process.env.CI ? true : true, // Run headless in CI
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
     video: 'on-first-retry',
