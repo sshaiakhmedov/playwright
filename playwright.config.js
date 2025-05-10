@@ -14,13 +14,12 @@ const config = {
   use: {
 
     // Configure browser and context here
-    headless: false,
+    headless: process.env.CI ? true : false, // Run headless in CI
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
     video: 'on-first-retry',
     screenshot: 'off'
   },
-  
 };
 
 module.exports = config;
