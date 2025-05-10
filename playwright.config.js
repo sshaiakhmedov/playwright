@@ -3,7 +3,7 @@
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
 const config = {
   // Limit the number of workers on CI, use default locally
-  workers: process.env.CI?2:undefined,
+  workers: process.env.CI?2:1,
   // Default reporter
   reporter: 'allure-playwright',
   // Custom reporter
