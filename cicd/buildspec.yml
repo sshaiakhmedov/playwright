@@ -1,20 +1,7 @@
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      nodejs: 20
-    commands:
-      - git checkout master
-      - npm install
   build:
     commands:
-      - echo "Node.js version:"
-      - node --version
-      - echo "Playwright installation check:"
-      - npx playwright install-deps
-      - echo "Running Playwright tests:"
+      - echo "Running tests"
       - npx playwright test
-  post_build:
-    commands:
-      - echo "we are done1"
