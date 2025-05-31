@@ -13,7 +13,7 @@ const config = {
 
   /* Shared options */
   use: {
-    browserName: 'chromium',
+    baseURL: process.env.BASE_URL || 'http://localhost:3000', // Default to localhost, override with env variable
     headless: true,
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,

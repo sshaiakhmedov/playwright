@@ -14,7 +14,7 @@
     "allure-playwright": "^2.0.0-beta.13"
   },
   "scripts": {
-    "pw": "npx playwright test",
+    "test": "npx playwright test",
     "allure": "allure generate ./allure-results --clean && allure open ./allure-report"
   },
   "keywords": [
