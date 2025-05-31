@@ -37,6 +37,7 @@ OR
 npx playwright test
 ```
 passing required flags, please refer to https://playwright.dev/docs/intro#command-line for more flags.
+
 #
 ## Running custom report <a name = "allure"></a>
 Run Allure-playwright reporter
@@ -50,5 +51,15 @@ which generates `allure-results` folder and spin up the server with the last run
 
 - [Playwright](https://www.mongodb.com/) - e2e Framework
 - [Allure](https://expressjs.com/) - Custom Reporter
+
+#
+## Setting up AWS CodeBuild + GitHub
+- got CodeBuild and create porject
+  - connect github (prior create toket n under GitHub/Settings/Developer/Fine-grained tokem)
+
+#
+## AWS CodeBuild
+- it runs on github actions - Pull Requests and commits
+- can run with overrides in AWS Console
 
 

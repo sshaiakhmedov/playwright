@@ -3,24 +3,23 @@
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
 const config = {
   // Limit the number of workers on CI, use default locally
-  workers: process.env.CI?2:undefined,
-  // Default reporter
-  reporter: 'allure-playwright',
-  // Custom reporter
-  //reporter: './myCustomReporter.js',
+  workers: process.env.CI ? 2 : 1,
 
-  /*Put any shared options on the top level.
-  use - is the top global level unles overwritten */
+  // Use multiple reporters
+  reporter: [
+    ['list'], // Shows test statistics in the terminal
+    ['allure-playwright'], // Keeps generating Allure reports
+  ],
+
+  /* Shared options */
   use: {
-
-    // Configure browser and context here
-    headless: false,
+    baseURL: process.env.BASE_URL || 'http://localhost:3000', // Default to localhost, override with env variable
+    headless: true,
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
     video: 'on-first-retry',
-    screenshot: 'off'
+    screenshot: 'on',
   },
-  
 };
 
 module.exports = config;
