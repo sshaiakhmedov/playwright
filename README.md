@@ -30,15 +30,40 @@ npm install
 
 To run tests use Command line using pre-defined script
 ```
-npm run pw
+npm run test
 ```
-OR
+OR row
 ```
 npx playwright test
 ```
 passing required flags, please refer to https://playwright.dev/docs/intro#command-line for more flags.
 
-#
+## Running in headed mode
+```
+npm run test -- --headed
+```
+
+## Debug mode with UI
+```
+npm run test -- --headed --debug
+
+```
+## Record traces
+```
+npm run test -- --headed --trace on
+```
+
+## Run specific test file
+```
+npm run test -- --headed --grep "test name"
+```
+## Run specific test
+```
+npm run test -- --headed tests/example.spec.ts
+```
+
+
+
 ## Running custom report <a name = "allure"></a>
 Run Allure-playwright reporter
 ```
