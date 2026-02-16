@@ -20,4 +20,9 @@ test.describe('Sharp Homepage', () => {
     await homePage.findADoctorButton.click();
     await expect(page).toHaveURL(URLS.DOCTORS_PAGE);
   });
+
+  test('Hero has corect header and subheader', async ({ page }) => {
+  await page.getByRole('heading', { name: 'San Diego\'s health care leader' }).click();
+  await page.getByText('Combining the science of').click();
+  });
 });

@@ -13,7 +13,10 @@ export class Home extends Base {
   // Locators as getters
   // Hero
   get findADoctorButton() {
-    return this.page.locator('#homepage-hero').getByRole('button', { name: 'Find a doctor' })
+    return this.page.locator('#homepage-hero').getByRole('button', { name: 'Find a doctor' });
   }
 
+  get heroHeaderh1() {
+    return this.page.getByRole('heading', { name: "San Diego's health care leader" }, { level: 1 });
+  }
 }
