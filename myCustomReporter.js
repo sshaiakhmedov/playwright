@@ -19,4 +19,4 @@ class MyReporter {
   }
 }
 
-module.exports = MyReporter;
+export default MyReporter;

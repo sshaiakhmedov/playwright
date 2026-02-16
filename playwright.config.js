@@ -9,17 +9,34 @@ const config = {
   reporter: [
     ['list'], // Shows test statistics in the terminal
     ['allure-playwright'], // Keeps generating Allure reports
+    ['./myCustomReporter.js'], // Your custom reporter
   ],
 
   /* Shared options */
   use: {
-    baseURL: process.env.BASE_URL || 'http://localhost:3000', // Default to localhost, override with env variable
     headless: true,
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
     video: 'on-first-retry',
     screenshot: 'on',
   },
+  projects: [
+    {
+      name: 'UI Tests',
+      testDir: './tests/ui',
+      use: { 
+        browserName: 'chromium',
+        baseURL: 'https://www.sharp.com/' 
+      },
+    },
+    {
+      name: 'API Tests',
+      testDir: './tests/api',
+      use: { 
+        baseURL: 'https://postman-echo.com', // Different base for API
+      },
+    },
+  ],
 };
 
-module.exports = config;
+export default config;
