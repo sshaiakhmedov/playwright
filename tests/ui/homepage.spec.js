@@ -1,28 +1,30 @@
-import { test, expect } from '@playwright/test';
-import { Base, FindADoctor, Home } from '../../pages';
+import { test, expect } from '../../util/fixtures';
 import { URLS, LABELS } from '../../constants';
 import { HOME_DATA } from '../../data/home.data';
 
 test.describe('Sharp Homepage', () => {
-  let homePage;
-
-  test.beforeEach(async ({ page }) => {
-    homePage = new Home(page);
-    await page.goto('/');
+  test.beforeEach(async ({ homePage }) => {
+    await homePage.goto('https://www.sharp.com/');
   });
 
-  test('landing page title', async ({ page }) => {
-    await homePage.getTitle();
-    await expect(page).toHaveTitle(HOME_DATA.title);
+  test('landing page title', async ({ homePage }) => {
+    await expect(homePage.page).toHaveTitle(HOME_DATA.title);
   });
 
-   test('Hero Button Find a doctor navigates to the correct URL', async ({ page }) => {
+  test('Top main nav links are visible', async ({ homePage }) => {
+    // Wrap the object in Object.values() to get an array of locators
+    for (const webEl of Object.values(homePage.topMainNavLinks)) {
+      await expect(webEl).toBeVisible();
+    }
+  });
+
+  test('Hero Button Find a doctor navigates to the correct URL', async ({ homePage }) => {
     await homePage.findADoctorButton.click();
-    await expect(page).toHaveURL(URLS.DOCTORS_PAGE);
+    await expect(homePage.page).toHaveURL(/doctors/);
   });
 
-  test('Hero has corect header and subheader', async ({ page }) => {
-  await page.getByRole('heading', { name: 'San Diego\'s health care leader' }).click();
-  await page.getByText('Combining the science of').click();
+  test('Hero has corect header and subheader', async ({ homePage }) => {
+    await homePage.page.getByRole('heading', { name: "San Diego's health care leader" }).click();
+    await homePage.page.getByText('Combining the science of').click();
   });
 });

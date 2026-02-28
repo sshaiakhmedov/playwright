@@ -32,6 +32,22 @@ npm run test:headed
 npm test -- --headed
 ```
 
+### API tests only
+```bash
+# Run all API tests (recommended)
+npm run test:api
+```
+
+Or by project name:
+```bash
+npx playwright test --project="API Tests"
+```
+
+Or a specific API spec file:
+```bash
+npx playwright test tests/api/postman.spec.js
+```
+
 ### Debug Mode (Inspector)
 ```bash
 npm run test:debug

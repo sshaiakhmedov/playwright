@@ -22,17 +22,18 @@ const config = {
   },
   projects: [
     {
+      timeout: 5000,
       name: 'UI Tests',
       testDir: './tests/ui',
-      use: { 
+      use: {
         browserName: 'chromium',
-        baseURL: 'https://www.sharp.com/' 
+        baseURL: 'https://www.sharp.com',
       },
     },
     {
       name: 'API Tests',
       testDir: './tests/api',
-      use: { 
+      use: {
         baseURL: 'https://postman-echo.com', // Different base for API
       },
     },

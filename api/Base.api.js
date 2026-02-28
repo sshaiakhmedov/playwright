@@ -1,6 +1,6 @@
 // api/Base.api.js
 export class BaseAPI {
-    constructor(request) {
+    constructor(request, token) {
         this.request = request;
         this.token = token; // Store the token if provided
     }

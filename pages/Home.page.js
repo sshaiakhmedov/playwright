@@ -11,6 +11,14 @@ export class Home extends Base {
   }
 
   // Locators as getters
+
+  get topMainNavLinks() {
+    return {
+      findADoctor: this.page.getByRole('link', { name: 'Find a doctor' }),
+      sameDayCare: this.page.getByRole('link', { name: 'Same-day care' }),
+      locations: this.page.getByRole('link', { name: 'Locations' }),
+    };
+  }
   // Hero
   get findADoctorButton() {
     return this.page.locator('#homepage-hero').getByRole('button', { name: 'Find a doctor' });
