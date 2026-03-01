@@ -1,5 +1,4 @@
-import { expect, test } from '@playwright/test';
-import { Base } from '../pages';
+import { Base } from './Base.page.js';
 
 export class ZeroConfig extends Base {
   /**
@@ -10,12 +9,30 @@ export class ZeroConfig extends Base {
     super(page);
   }
 
-  // getters
+  // Web Elements
   get zeroConfigTable() {
     return this.page.getByRole('link', { name: 'Zero configuration' });
   }
 
+  // number of entries on the page
   get pageStatus() {
     return this.page.getByRole('status');
+  }
+
+  // Table on Zero configuration page
+  get table() {
+    return this.page.locator('table#example');
+  }
+
+  get tableHeaders() {
+    return this.table.locator('thead th');
+  }
+
+  get tableRows() {
+    return this.table.locator('tbody tr');
+  }
+
+  get ageColumnHeader() {
+    return this.table.locator('.dt-column-header:has-text("Age")');
   }
 }
