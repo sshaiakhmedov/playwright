@@ -22,12 +22,15 @@ const config = {
   },
   projects: [
     {
-      timeout: 5000,
+      timeout: 30000, // whole test (ms)
+      expect: { timeout: 5000 }, // expect assertions
       name: 'UI Tests',
       testDir: './tests/ui',
       use: {
         browserName: 'chromium',
         baseURL: 'https://www.sharp.com',
+        navigationTimeout: 15000, // page.goto, reload, etc.
+        actionTimeout: 10000, // click, fill, check, etc.
       },
     },
     {
@@ -36,6 +39,7 @@ const config = {
       use: {
         baseURL: 'https://postman-echo.com', // Different base for API
       },
+      timeout: 10000,
     },
   ],
 };
