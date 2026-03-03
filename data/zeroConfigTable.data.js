@@ -3,6 +3,7 @@ export const ZERO_CONFIG_TABLE = {
   MIN_ENTRIES: 25,
   TABLE: {
     OLDEST_AGE: 66,
+    YOUNGEST_AGE: 19,
     HEADERS: {
       NAME: 'Name',
       POSITION: 'Position',
