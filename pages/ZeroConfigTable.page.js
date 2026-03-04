@@ -1,12 +1,13 @@
 import { Base } from './Base.page.js';
+import { LoginComponent } from '../components/Login.component.js';
 
 export class ZeroConfig extends Base {
   /**
    * @param {import('@playwright/test').Page} page
    */
-
   constructor(page) {
     super(page);
+    this.login = new LoginComponent(this.page);
   }
 
   // Web Elements

@@ -11,21 +11,25 @@ A test automation setup using Playwright with JavaScript tests and config.
 ## Running Tests
 
 ### Default (Headless Mode)
+
 ```bash
 npm test
 ```
 
 ### Individual single test
+
 ```bash
 npx playwright test community.spec.js
 ```
 
 ### Single spec, single Browser, Headed mode
+
 ```bash
 npx playwright test community.spec.js --project=chromium --headed
 ```
 
 ### Headed Mode (Visible Browser Windows)
+
 ```bash
 npm run test:headed
 # or
@@ -33,22 +37,26 @@ npm test -- --headed
 ```
 
 ### API tests only
+
 ```bash
 # Run all API tests (recommended)
 npm run test:api
 ```
 
 Or by project name:
+
 ```bash
 npx playwright test --project="API Tests"
 ```
 
 Or a specific API spec file:
+
 ```bash
 npx playwright test tests/api/postman.spec.js
 ```
 
 ### Debug Mode (Inspector)
+
 ```bash
 npm run test:debug
 # or
@@ -58,25 +66,27 @@ npm test -- --debug
 ## Available Flags & Options
 
 Pass any Playwright flag to customize test execution:
+
 ```bash
 npm test -- [flags]
 ```
 
 ### Common Flags
 
-| Flag | Description |
-|------|-------------|
-| `--headed` | Run with visible browser windows |
-| `--debug` | Run tests in debug mode with inspector |
-| `--ui` | Run tests in UI mode (interactive) |
-| `--reporter=html` | Generate HTML report (default) |
-| `--reporter=list` | List reporter |
-| `--workers=1` | Run tests sequentially (default: 4 parallel) |
-| `--grep=pattern` | Run tests matching pattern |
-| `--project=chromium` | Run only on Chromium browser |
-| `--update-snapshots` | Update snapshot files |
+| Flag                 | Description                                  |
+| -------------------- | -------------------------------------------- |
+| `--headed`           | Run with visible browser windows             |
+| `--debug`            | Run tests in debug mode with inspector       |
+| `--ui`               | Run tests in UI mode (interactive)           |
+| `--reporter=html`    | Generate HTML report (default)               |
+| `--reporter=list`    | List reporter                                |
+| `--workers=1`        | Run tests sequentially (default: 4 parallel) |
+| `--grep=pattern`     | Run tests matching pattern                   |
+| `--project=chromium` | Run only on Chromium browser                 |
+| `--update-snapshots` | Update snapshot files                        |
 
 ### Examples
+
 ```bash
 # Run tests in UI mode
 npm test -- --ui
@@ -95,45 +105,56 @@ npm test -- --headed --reporter=list
 ```
 
 # Run tests for a specific browser
+
 ```
 npm run test -- --project=chromium
 ```
+
 ```
 npm run test -- --project=firefox
 ```
+
 ```
 npm run test -- --project=webkit
 ```
 
 ## Run tests using bash script
+
 ```
 ./run-tests.sh
 ```
 
-## Running the tests in the container 
+## Running the tests in the container
+
 1. Build the Docker image
+
 ```
 docker build -t pw-tests .
 ```
 
 2.1 Run all tests in Docker based on CMD command in Docker file
+
 ```
 docker run --rm pw-tests
 ```
 
 2.2 Run specific test file
+
 ```
 docker run --rm pw-tests npx playwright test fadMenuInSharpCom.spec.js
 ```
 
 # Important Note
+
 When passing flags to Playwright through npm, use -- before the flags. This tells npm to pass everything after it to the test command:
+
 ```
 npm run test -- --headed     # ✅ Correct
 npm run test --headed        # ❌ Wrong - npm ignores the flag
 ```
 
 ## Project Structure
+
 ```
 page-objects/
   ├── BasePage.js               # Base page object class with common methods
@@ -150,20 +171,23 @@ package.json                    # npm scripts and dependencies
 This project uses the **Page Object Model** pattern for better test maintainability:
 
 ### BasePage Class
+
 Provides common functionality for all pages:
+
 - Navigation
 - Clicking elements
 - Filling inputs
 - Checking visibility
 
 ### Creating a New Page Object
+
 ```javascript
 import { BasePage } from './BasePage.js';
 
 export class MyPage extends BasePage {
   constructor(page) {
     super(page);
-    
+
     // Define selectors as class properties
     this.myButton = page.locator('button#my-button');
     this.myInput = page.locator('input#my-input');
@@ -181,6 +205,7 @@ export class MyPage extends BasePage {
 ```
 
 ### Using Page Objects in Tests
+
 ```javascript
 import { test, expect } from '@playwright/test';
 import { PlaywrightDocsPage } from '../page-objects/index.js';
@@ -193,6 +218,90 @@ test('example', async ({ page }) => {
 });
 ```
 
+## Reusable Components
+
+When **the same UI appears on multiple pages** (e.g. login form, header, footer, search box), put it in a **component** so you define locators and actions once and stay DRY.
+
+### When to add a component
+
+- **Same block of UI on 2+ page objects** – e.g. login form on Home and on Find a Doctor.
+- **Reusable widget** – header, sidebar, modal, cookie banner, etc.
+
+If only one page has that UI, you can keep it inside that page object. Add a component when you’re about to copy the same selectors/actions to a second page.
+
+### Where components live
+
+- Folder: `components/`
+- One file per component: `Login.component.js`, `Header.component.js`, etc.
+- Export from `components/index.js` if you want a single import path.
+
+### How to create a component
+
+A component is a class that receives `page` and an optional **root** locator (to scope the component to a modal or section):
+
+```javascript
+// components/Login.component.js
+export class LoginComponent {
+  constructor(page, root) {
+    this.page = page;
+    this.root = root ?? page; // scope to root, or whole page
+  }
+
+  get loginButton() {
+    return this.root.getByRole('link', { name: 'Login / Register' });
+  }
+}
+```
+
+- **No `root`** → component uses the whole page (e.g. full-page login or header).
+- **With `root`** → all getters use `this.root.locator(...)` so the same component works inside a modal or sidebar.
+
+### How to import and use a component in a Page Object
+
+1. Import the component class.
+2. In the page constructor, create an instance and assign it to `this` (e.g. `this.login`).
+3. Use the page’s `this.page` (and optional root) when constructing the component.
+
+```javascript
+// pages/ZeroConfigTable.page.js
+import { Base } from './Base.page.js';
+import { LoginComponent } from '../components/Login.component.js';
+
+export class ZeroConfig extends Base {
+  constructor(page) {
+    super(page);
+    this.login = new LoginComponent(this.page);
+  }
+  // ... rest of page
+}
+```
+
+If the component lives inside a modal or section, pass a second argument (root locator): `new LoginComponent(this.page, this.page.locator('#login-modal'))`.
+
+### How to use the component in a test
+
+Use the component through the page object. The fixture (e.g. `zeroConfigPage`) already has `login` attached:
+
+```javascript
+// tests/ui/zeroConfig.spec.js
+test('main login button is visible', async ({ zeroConfigPage }) => {
+  await expect(zeroConfigPage.login.loginButton).toBeVisible();
+});
+
+test('can open login and sign in', async ({ zeroConfigPage }) => {
+  await zeroConfigPage.login.loginButton.click();
+  await zeroConfigPage.login.login('user@example.com', 'password');
+});
+```
+
+Summary:
+
+| Step | Action                                                                                                                                                                  |
+| ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | Add `components/MyComponent.component.js` with locators and methods.                                                                                                    |
+| 2    | In the PO: `import { MyComponent } from '../components/MyComponent.component.js'` and in constructor: `this.myComponent = new MyComponent(this.page)` (or with a root). |
+| 3    | In the test: use the fixture and the component, e.g. `myPage.myComponent.someButton.click()`.                                                                           |
+
 # Testing by different selectors
 
 ## getByRole()
@@ -202,14 +311,15 @@ test('example', async ({ page }) => {
 Role refers to the **semantic purpose** of an element as understood by assistive technologies (screen readers, etc.).
 
 #### Common Roles
+
 ```javascript
-page.getByRole('button')      // <button>, <input type="button">, role="button"
-page.getByRole('link')        // <a href="...">, role="link"
-page.getByRole('heading')     // <h1>, <h2>, <h3>, etc.
-page.getByRole('textbox')     // <input type="text">, <textarea>
-page.getByRole('checkbox')    // <input type="checkbox">
-page.getByRole('img')         // <img>, role="img"
-page.getByRole('navigation')  // <nav>, role="navigation"
+page.getByRole('button'); // <button>, <input type="button">, role="button"
+page.getByRole('link'); // <a href="...">, role="link"
+page.getByRole('heading'); // <h1>, <h2>, <h3>, etc.
+page.getByRole('textbox'); // <input type="text">, <textarea>
+page.getByRole('checkbox'); // <input type="checkbox">
+page.getByRole('img'); // <img>, role="img"
+page.getByRole('navigation'); // <nav>, role="navigation"
 ```
 
 #### Why This Matters
@@ -223,17 +333,19 @@ Playwright focuses on **testing like a user** (including users with disabilities
 #### WebdriverIO vs Playwright
 
 **WebdriverIO:**
+
 ```javascript
 // Traditional CSS/XPath selectors
-$('button.submit-btn')
-$('//a[text()="Community"]')
+$('button.submit-btn');
+$('//a[text()="Community"]');
 ```
 
 **Playwright:**
+
 ```javascript
 // User-centric, accessibility-focused
-page.getByRole('button', { name: 'Submit' })
-page.getByRole('link', { name: 'Community' })
+page.getByRole('button', { name: 'Submit' });
+page.getByRole('link', { name: 'Community' });
 ```
 
 #### The Hierarchy Playwright Recommends
