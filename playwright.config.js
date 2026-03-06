@@ -9,7 +9,8 @@ const config = {
   reporter: [
     ['list'], // Shows test statistics in the terminal
     ['allure-playwright'], // Keeps generating Allure reports
-    ['./myCustomReporter.js'], // Your custom reporter
+    // ['./util/customReporter.js'], // Your custom reporter // TODO: find out why i need it
+    ['html'], // The default Playwright HTML report
   ],
 
   /* Shared options */

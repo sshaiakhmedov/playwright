@@ -12,7 +12,7 @@ test.describe('Postman Echo API Tests', () => {
         };
 
         const response = await api.postman.getPostmanEcho(queryParams);
-        console.log(JSON.stringify(response, null, 2));
+        // console.log(JSON.stringify(response, null, 2));
         // Assertions remain dynamic based on what you passed
         expect(response.args.key1).toBe('bar1');
         expect(response.args.key3).toBe('extraParam');
@@ -26,7 +26,7 @@ test.describe('Postman Echo API Tests', () => {
         };
 
         const response = await api.postman.postPostmanEcho(payload);
-        console.log(JSON.stringify(response, null, 2));
+        // console.log(JSON.stringify(response, null, 2));
         // Assertions based on the payload you sent
         expect(response.json.name).toBe('John Doe');
         expect(response.json.age).toBe(30);

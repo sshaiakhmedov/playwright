@@ -29,19 +29,23 @@ export class LoginComponent {
 
   // THese are auto-generated, haven't been used yet
   get usernameInput() {
-    return this.root.getByRole('textbox', { name: /username|email|user/i });
+    return this.root.getByRole('textbox', { name: 'Email or Username:' });
   }
 
   get passwordInput() {
-    return this.root.getByRole('textbox', { name: /password/i });
+    return this.root.getByRole('textbox', { name: 'Password:' }).first();
   }
 
-  get submitButton() {
-    return this.root.getByRole('button', { name: /log in|sign in|submit/i });
+  get signinRegisterButton() {
+    return this.root.getByRole('button', { name: 'Sign in' }).first();
   }
 
   get forgotPasswordLink() {
-    return this.root.getByRole('link', { name: /forgot password/i });
+    return this.root.getByRole('link', { name: 'Forgot?' });
+  }
+
+  get notBotCheckbox() {
+    return this.root.getByRole('checkbox');
   }
 
   /**
@@ -52,7 +56,7 @@ export class LoginComponent {
   async login(username, password) {
     await this.usernameInput.fill(username);
     await this.passwordInput.fill(password);
-    await this.submitButton.click();
+    await this.signinRegisterButton.click();
   }
 
   /**
