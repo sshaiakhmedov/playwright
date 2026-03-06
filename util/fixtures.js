@@ -1,6 +1,6 @@
 import { test as base, expect } from '@playwright/test';
 import { ApiManager } from '../api/ApiManager.js';
-import { Home, FindADoctor, ZeroConfig } from '../pages';
+import { Home, FindADoctor, ZeroConfig, FeatureEnableDisable } from '../pages';
 
 /**
  * @typedef {Object} MyFixtures
@@ -8,6 +8,7 @@ import { Home, FindADoctor, ZeroConfig } from '../pages';
  * @property {Home} homePage
  * @property {FindADoctor} findADoctorPage
  * @property {ZeroConfig} zeroConfigPage
+ * @property {FeatureEnableDisable} featureEnableDisablePage
  */
 
 /** @type {import('@playwright/test').TestType<MyFixtures, {}>} */
@@ -27,6 +28,10 @@ export const test = base.extend({
   zeroConfigPage: async ({ page }, use) => {
     const zeroConfig = new ZeroConfig(page);
     await use(zeroConfig);
+  },
+  featureEnableDisablePage: async ({ page }, use) => {
+    const featureEnableDisable = new FeatureEnableDisable(page);
+    await use(featureEnableDisable);
   },
 });
 
