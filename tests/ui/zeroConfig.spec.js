@@ -42,6 +42,7 @@ test.describe('Zero Config table', () => {
 
   test('main login button is visible', async ({ zeroConfigPage }) => {
     await expect(zeroConfigPage.login.loginButton).toBeVisible();
+    await expect(zeroConfigPage.login.loginButton).toHaveText('Login / Register');
   });
 
   test.skip('should allow an existing user to log in', async ({ zeroConfigPage }) => {
@@ -49,5 +50,4 @@ test.describe('Zero Config table', () => {
     await zeroConfigPage.login.login('user@example.com', 'password123');
     await expect(zeroConfigPage.login.usernameInput).not.toBeVisible(); // Assuming login form disappears on success
   });
-  // TODO: subsripbe to cursor and see how it can be used with skills etc
 });

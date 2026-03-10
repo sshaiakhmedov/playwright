@@ -21,6 +21,11 @@ npm test
 ```bash
 npx playwright test community.spec.js
 ```
+Or, when using your npm test script (pass `--` to forward arguments):
+
+```bash
+npm run test -- demoblazeLogin.spec.js --headed
+```
 
 ### Single spec, single Browser, Headed mode
 

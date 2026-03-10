@@ -33,5 +33,5 @@ test.describe('Feature enable / disable table', () => {
     // Verify his age
     const ageCell = featureEnableDisablePage.getAgeCell(row);
     await expect(ageCell).toHaveText('61');
-  });
+  }); 
 });

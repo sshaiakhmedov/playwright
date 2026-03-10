@@ -3,3 +3,4 @@ export { FindADoctor } from './FindADoctor.page.js';
 export { Home } from './Home.page.js';
 export { ZeroConfig } from './ZeroConfigTable.page.js';
 export { FeatureEnableDisable } from './FeatureEnableDisable.page.js';
+export { DemoblazeHome } from './DemoblazeHome.page.js';
