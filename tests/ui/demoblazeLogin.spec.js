@@ -7,21 +7,23 @@ test.describe('Demoblaze Login Tests', () => {
   const PASSWORD = process.env.DEMOBLAZE_PASSWORD;
 
   test('Happy Path: User can log in with valid credentials', async ({ demoblazeHomePage }) => {
-    // Navigate to homepage
-    await demoblazeHomePage.goto();
+    await test.step('Navigate to homepage', async () => {
+      await demoblazeHomePage.goto();
+    });
 
-    // Open login modal
-    await demoblazeHomePage.loginModal.openLoginModal();
-    
-    // Ensure modal is visible
-    await expect(demoblazeHomePage.loginModal.usernameInput).toBeVisible();
+    await test.step('Open login modal', async () => {
+      await demoblazeHomePage.loginModal.openLoginModal();
+      await expect(demoblazeHomePage.loginModal.usernameInput).toBeVisible();
+    });
 
-    // Login with credentials
-    await demoblazeHomePage.loginModal.login(USERNAME, PASSWORD);
+    await test.step('Login with credentials', async () => {
+      await demoblazeHomePage.loginModal.login(USERNAME, PASSWORD);
+    });
 
-    // Assert successful login
-    await expect(demoblazeHomePage.welcomeMessage).toBeVisible();
-    await expect(demoblazeHomePage.welcomeMessage).toHaveText(`Welcome ${USERNAME}`);
+    await test.step('Verify successful login message', async () => {
+      await expect(demoblazeHomePage.welcomeMessage).toBeVisible();
+      await expect(demoblazeHomePage.welcomeMessage).toHaveText(`Welcome ${USERNAME}`);
+    });
   });
 
   const negativeScenarios = DEMOBLAZE_DATA.getNegativeLoginScenarios(USERNAME, PASSWORD);
