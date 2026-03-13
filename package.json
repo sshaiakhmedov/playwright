@@ -13,14 +13,16 @@
     "dotenv": "^17.3.1"
   },
   "devDependencies": {
-    "allure-playwright": "^2.0.0-beta.13"
+    "allure-playwright": "^2.0.0-beta.13",
+    "husky": "^9.1.7"
   },
   "scripts": {
     "test": "npx playwright test",
     "test:ui": "npx playwright test tests/ui",
     "test:api": "npx playwright test tests/api",
     "test:headed": "npx playwright test --headed",
-    "allure": "allure generate ./allure-results --clean && allure open ./allure-report"
+    "allure": "allure generate ./allure-results --clean && allure open ./allure-report",
+    "prepare": "husky"
   },
   "keywords": [
     "playwright"
