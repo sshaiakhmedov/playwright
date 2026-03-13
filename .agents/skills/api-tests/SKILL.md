@@ -9,6 +9,23 @@ description: Guidelines on how to write API tests using Playwright's APIRequestC
 
 Playwright can be used for API testing alongside UI testing via the built-in `request` fixture, which provides an `APIRequestContext`. When writing API tests, we want to maintain separation of concerns and reusability.
 
+## Pre-requisites for Local PostgREST Tests
+
+If you are running or writing API tests against the local PostgREST setup, the database and API must be running.
+
+### 1. Start the Server
+Before running `npm run test:api` or committing API test changes (which triggers the husky hook), ensure the Docker containers are running:
+```bash
+docker-compose up -d
+```
+
+### 2. Verify it's Running
+You can quickly check if the PostgREST server is responding before running your Playwright tests:
+```bash
+curl http://localhost:3000/
+# Or just run the tests: npm run test:api
+```
+
 ## How to Add a new API Spec
 
 *** FLOW: ***
