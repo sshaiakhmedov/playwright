@@ -36,6 +36,5 @@ git commit -m "Add negative login test scenarios"
 
 Before committing, verify:
 - [ ] The test runs successfully locally.
-- [ ] No `test.only` or `test.skip` was accidentally left in the code.
-- [ ] No hardcoded wait times (`page.waitForTimeout`) were left in the code.
+- [ ] Global `AGENTS.md` rules are followed (no `test.only`, no `page.waitForTimeout`, etc.).
 - [ ] The commit message accurately reflects the changes.

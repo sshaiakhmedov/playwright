@@ -24,23 +24,11 @@ description: Guidelines on how to write Playwright UI tests, best practices, MUS
 9. use fixtures from util/fixtures.js.
 10. If new spec implies new Page Object, Component, Fixture, Constant, Data, or Locator, create it in the appropriate folder.
 
-*** NEVER DO THE FOLLOWING: ***
-1. Never store lcoators in the spec files.
-2. Never store constants in the spec files.
-3. Never store data in the spec files.
-4. Never store environment variables in the spec files.
-5. Never store page objects in the spec files.
-6. Never store components in the spec files.
-7. Never store fixtures in the spec files.
+*(Note: For generic anti-patterns like "No locators/constants in specs", refer to the global `AGENTS.md` rules.)*
 
 **MANDATORY VERIFICATION CHECKLIST:** Before finalizing any UI Test implementation, you MUST explicitly go through this checklist and verify it to the user:
-   - [ ] No locators in the spec file
-   - [ ] No constants in the spec file
-   - [ ] No test data or hardcoded strings (URLs, usernames, passwords) in the spec file
-   - [ ] No environment variables read directly inside the `describe` blocks without being extracted to data/constants
-   - [ ] Using Page Objects from `pages/`
-   - [ ] Using Components from `components/` where UI is shared
-   - [ ] Prioritizing `getByRole()` over  any other locator strategy. Here is the order of locator strategies:
+   - [ ] Global `AGENTS.md` rules are followed (No locators, data, or env vars in specs; Page Objects and Components used correctly).
+   - [ ] Prioritizing `getByRole()` over any other locator strategy. Here is the order of locator strategies:
    - getByRole
    - getByLabel
    - getByPlaceholder

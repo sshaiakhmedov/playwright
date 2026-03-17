@@ -41,12 +41,12 @@ curl http://localhost:3000/
 5. **Use correct assertions:** Use Playwright's `expect` assertions (e.g., `expect(response.ok()).toBeTruthy()`, `expect(response.status()).toBe(200)`).
 
 *** NEVER DO THE FOLLOWING: ***
-1. Never hardcode tokens or sensitive credentials in the API spec.
-2. Never store massive JSON payloads directly inside the `test()` block.
-3. Never chain UI interactions in the same test block as a pure API test unless you are specifically testing UI-API boundaries (in which case, it's an E2E test, not an API test).
+*(Note: For generic anti-patterns like "No hardcoded credentials", refer to the global `AGENTS.md` rules.)*
+1. Never store massive JSON payloads directly inside the `test()` block.
+2. Never chain UI interactions in the same test block as a pure API test unless you are specifically testing UI-API boundaries (in which case, it's an E2E test, not an API test).
 
 **MANDATORY VERIFICATION CHECKLIST:** Before finalizing any API Test implementation, you MUST explicitly go through this checklist and verify it to the user:
-   - [ ] No hardcoded tokens/passwords in the spec.
+   - [ ] Global `AGENTS.md` rules are followed.
    - [ ] Request bodies/Complex parameters are extracted to `data/` or generated via factory functions.
    - [ ] API endpoints are stored as constants or read from config if they change between environments.
    - [ ] Using `expect(response.ok()).toBeTruthy()` or explicitly checking the `status()` before checking the response JSON.
