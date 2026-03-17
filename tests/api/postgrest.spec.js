@@ -16,7 +16,7 @@ test.describe('PostgREST API Tests', () => {
     // 3. Parse and validate the JSON body
     const body = await response.json();
     console.log('GET Response:', body);
-    
+
     expect(Array.isArray(body)).toBeTruthy();
     // Verify our sample data from setup.sql exists
     expect(body.length).toBeGreaterThanOrEqual(3);
@@ -29,32 +29,33 @@ test.describe('PostgREST API Tests', () => {
     let body = {};
     const newTodo = {
       title: 'Write more automated API tests',
-      completed: false
+      completed: false,
     };
 
     // 1. Send POST request with JSON payload
     // PostgREST normally returns 201 Created and an empty body, unless we pass the 'Prefer: return=representation' header
     const response = await request.post(API_URL, {
       headers: {
-        'Prefer': 'return=representation'
+        Prefer: 'return=representation',
       },
-      data: newTodo
+      data: newTodo,
     });
+
     await test.step('Validate creation', async () => {
       expect(response.status()).toBe(201);
     });
-    
+
     await test.step('Validate response data', async () => {
       body = await response.json();
       console.log('POST Response:', body);
-      
-      expect(body.length).toBe(1);
+
+      expect(body).toHaveLength(1);
       expect(body[0].title).toBe('Write more automated API tests');
       expect(body[0].completed).toBe(false);
       expect(body[0].id).toBeDefined();
     });
 
-    // Let's comment this out so that your added record stays in the database 
+    // Let's comment this out so that your added record stays in the database
     // and you can see it when visiting http://localhost:3000/todos!
     /*
     await test.step('Clean up (DELETE) the created record to keep state clean', async () => {
@@ -63,5 +64,4 @@ test.describe('PostgREST API Tests', () => {
     });
     */
   });
-
 });

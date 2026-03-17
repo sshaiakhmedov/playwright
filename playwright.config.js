@@ -29,7 +29,7 @@ const config = {
       testMatch: /.*\.setup\.js/,
       use: {
         baseURL: 'https://www.demoblaze.com',
-      }
+      },
     },
     {
       timeout: 30000, // whole test (ms)

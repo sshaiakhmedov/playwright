@@ -37,14 +37,14 @@ test.describe('Demoblaze Login Tests', () => {
 
       // Set up dialog handler before triggering action
       let dialogMessage = '';
-      page.on('dialog', async dialog => {
+      page.on('dialog', async (dialog) => {
         dialogMessage = dialog.message();
         await dialog.accept();
       });
 
       // Open login modal
       await demoblazeHomePage.loginModal.openLoginModal();
-      
+
       // Ensure modal is visible
       await expect(demoblazeHomePage.loginModal.usernameInput).toBeVisible();
 

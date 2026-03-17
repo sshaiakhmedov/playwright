@@ -1,22 +1,20 @@
 import { test, expect } from '../../util/fixtures';
 
 test.describe('Demoblaze API Mocking', () => {
-
   test('Mock the /entries API to display a custom Playwright Product', async ({ demoblazeHomePage, page }) => {
-    
     // 1. Define the custom JSON payload we want to inject into the frontend
     const MOCK_DATA = {
       Items: [
         {
-          cat: "notebook",
-          desc: "This is a custom laptop injected via Playwright Network Mocking. It is the fastest laptop in the world.",
+          cat: 'notebook',
+          desc: 'This is a custom laptop injected via Playwright Network Mocking. It is the fastest laptop in the world.',
           id: 999,
-          img: "imgs/macbook_air.jpg",
+          img: 'imgs/macbook_air.jpg',
           price: 9999,
-          title: "Playwright Pro M4 Max"
-        }
+          title: 'Playwright Pro M4 Max',
+        },
       ],
-      LastEvaluatedKey: { id: "9" }
+      LastEvaluatedKey: { id: '9' },
     };
 
     // 2. Intercept the network request BEFORE navigating
@@ -39,7 +37,7 @@ test.describe('Demoblaze API Mocking', () => {
 
     // Assert the custom price is rendered
     await expect(demoblazeHomePage.getProductPrice('$9999')).toBeVisible();
-    
+
     // Assert the custom description is rendered
     await expect(demoblazeHomePage.getProductDescription('This is a custom laptop injected via Playwright Network Mocking.')).toBeVisible();
   });

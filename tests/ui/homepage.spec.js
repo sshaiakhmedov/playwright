@@ -24,7 +24,7 @@ test.describe('Sharp Homepage', () => {
   });
 
   test('Hero has corect header and subheader', async ({ homePage }) => {
-    await homePage.page.getByRole('heading', { name: "San Diego's health care leader" }).click();
+    await homePage.page.getByRole('heading', { name: 'San Diego\'s health care leader' }).click();
     await homePage.page.getByText('Combining the science of').click();
   });
 });

@@ -19,12 +19,13 @@ export class Home extends Base {
       locations: this.page.getByRole('link', { name: 'Locations' }),
     };
   }
+
   // Hero
   get findADoctorButton() {
     return this.page.locator('#homepage-hero').getByRole('button', { name: 'Find a doctor' });
   }
 
   get heroHeaderh1() {
-    return this.page.getByRole('heading', { name: "San Diego's health care leader" }, { level: 1 });
+    return this.page.getByRole('heading', { name: 'San Diego\'s health care leader' }, { level: 1 });
   }
 }

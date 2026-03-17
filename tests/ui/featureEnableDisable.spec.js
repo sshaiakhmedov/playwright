@@ -12,7 +12,7 @@ test.describe('Feature enable / disable table', () => {
 
     // Pagination controls should not be visible
     await expect(featureEnableDisablePage.pagination).toHaveCount(0);
-    
+
     // Page status (e.g. "Showing 1 to 57 of 57 entries") should not be visible
     await expect(featureEnableDisablePage.pageStatus).toHaveCount(0);
 
@@ -21,8 +21,8 @@ test.describe('Feature enable / disable table', () => {
   });
 
   test('loads all 57 entries because pagination is disabled', async ({ featureEnableDisablePage }) => {
-    const rowCount = await featureEnableDisablePage.table.rows.count();
-    expect(rowCount).toBe(57);
+    const rowCount = featureEnableDisablePage.table.rows;
+    await expect(rowCount).toHaveCount(57);
   });
 
   test('verify specific cell data - Tiger Nixon', async ({ featureEnableDisablePage }) => {
@@ -33,5 +33,5 @@ test.describe('Feature enable / disable table', () => {
     // Verify his age
     const ageCell = featureEnableDisablePage.getAgeCell(row);
     await expect(ageCell).toHaveText('61');
-  }); 
+  });
 });

@@ -1,3 +1,3 @@
 export const FAD_DATA = {
-  title: 'Find San Diego Doctors at Sharp HealthCare'
+  title: 'Find San Diego Doctors at Sharp HealthCare',
 };

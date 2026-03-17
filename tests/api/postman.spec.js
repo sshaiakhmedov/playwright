@@ -2,13 +2,12 @@
 import { test, expect } from '../../util/fixtures';
 
 test.describe('Postman Echo API Tests', () => {
-
     test('GET with 2 query parameters returns 200', async ({ api }) => {
             // You can now pass any key-value pairs here
         const queryParams = {
             key1: 'bar1',
             key2: 'bar2',
-            key3: 'extraParam' 
+            key3: 'extraParam',
         };
 
         const response = await api.postman.getPostmanEcho(queryParams);
@@ -22,7 +21,7 @@ test.describe('Postman Echo API Tests', () => {
         const payload = {
             name: 'John Doe',
             email: 'john.doe@example.com',
-            age: 30
+            age: 30,
         };
 
         const response = await api.postman.postPostmanEcho(payload);

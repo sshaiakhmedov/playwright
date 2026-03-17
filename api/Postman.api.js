@@ -14,7 +14,7 @@ export class PostmanAPI extends BaseAPI {
     async postPostmanEcho(payload) {
         // Sends a POST request with search filters
         const response = await this.request.post(API_ENDPOINTS.POSTMAN_ECHO_POST, {
-            data: payload
+            data: payload,
         });
         return this.validateAndParse(response, 200);
     }

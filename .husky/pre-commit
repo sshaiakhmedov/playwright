@@ -16,6 +16,12 @@ for file in $staged_files; do
     run_api=true
   fi
 done
+# Run lint-staged first to catch formatting and linting errors
+echo "Husky: Running lint-staged..."
+if ! npx lint-staged; then
+  echo "Husky: lint-staged failed. Commit aborted."
+  exit 1
+fi
 
 if [ "$run_ui" = "true" ]; then
   echo "Husky: Staged changes affect UI tests. Running npm run test:ui..."

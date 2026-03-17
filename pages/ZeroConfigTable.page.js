@@ -63,8 +63,8 @@ export class ZeroConfig extends Base {
    */
   async getCellText(row, headerName) {
     const headers = await this.table.headers.allTextContents();
-    const normalized = headers.map((h) => (h || '').trim());
-    const colIndex = normalized.findIndex((h) => h.toLowerCase() === headerName.toLowerCase());
+    const normalized = headers.map(h => (h || '').trim());
+    const colIndex = normalized.findIndex(h => h.toLowerCase() === headerName.toLowerCase());
     if (colIndex === -1) {
       throw new Error(`Column "${headerName}" not found. Headers: ${normalized.join(', ')}`);
     }

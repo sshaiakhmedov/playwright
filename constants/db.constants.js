@@ -1,4 +1,3 @@
-export default ENDPOINTS {
-eXAMPLE_INDES:
-
-}
+export const ENDPOINTS = {
+  eXAMPLE_INDES: '',
+};

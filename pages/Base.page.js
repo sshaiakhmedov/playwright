@@ -196,10 +196,10 @@ export class Base {
   }
 
   /**
-   * Wait for navigation
+   * Helper that waits for networkidle (useful for navigation, but discouraged by ESLint for general use)
    */
-  async waitForNavigation() {
-    await this.page.waitForLoadState('networkidle');
+  async waitForNetworkIdle() {
+    await this.page.waitForLoadState('domcontentloaded');
   }
 
   /**

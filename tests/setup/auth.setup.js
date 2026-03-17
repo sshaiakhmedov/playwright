@@ -6,7 +6,7 @@ setup('authenticate and save state', async ({ demoblazeHomePage, page }) => {
   // Use environment variables for credentials
   const USERNAME = process.env.DEMOBLAZE_USERNAME;
   const PASSWORD = process.env.DEMOBLAZE_PASSWORD;
-  
+
   // 1. Navigate to the page
   await demoblazeHomePage.goto();
 
@@ -20,7 +20,7 @@ setup('authenticate and save state', async ({ demoblazeHomePage, page }) => {
   // 4. Verify login was successful (Welcome message is visible)
   await expect(demoblazeHomePage.welcomeMessage).toBeVisible();
   await expect(demoblazeHomePage.welcomeMessage).toHaveText(`Welcome ${USERNAME}`);
-  
+
   // 5. Save the authentication state (cookies and localStorage)
   await page.context().storageState({ path: authFile });
 });

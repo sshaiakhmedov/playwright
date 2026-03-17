@@ -17,20 +17,19 @@ test.describe('Zero Config table', () => {
   });
 
   test('verifies table headers', async ({ zeroConfigPage }) => {
-    const headers = await zeroConfigPage.table.headers.allTextContents();
-    expect(headers).toEqual(Object.values(ZERO_CONFIG_TABLE.TABLE.HEADERS));
+    await expect(zeroConfigPage.table.headers).toHaveText(Object.values(ZERO_CONFIG_TABLE.TABLE.HEADERS));
   });
 
   test('The oldest user with the age of 66', async ({ zeroConfigPage }) => {
     await zeroConfigPage.sortColumnBy('Age', 'desc');
-    const firstTableRow = await zeroConfigPage.table.rows.first();
+    const firstTableRow = zeroConfigPage.table.rows.first();
     const oldestAge = await zeroConfigPage.getCellText(firstTableRow, ZERO_CONFIG_TABLE.TABLE.HEADERS.AGE);
     expect(Number(oldestAge)).toBe(ZERO_CONFIG_TABLE.TABLE.OLDEST_AGE);
   });
 
   test('The youngest user with the age of 20', async ({ zeroConfigPage }) => {
     await zeroConfigPage.sortColumnBy('Age', 'asc');
-    const firstTableRow = await zeroConfigPage.table.rows.first();
+    const firstTableRow = zeroConfigPage.table.rows.first();
     const youngestAge = await zeroConfigPage.getCellText(firstTableRow, ZERO_CONFIG_TABLE.TABLE.HEADERS.AGE);
     expect(Number(youngestAge)).toBe(ZERO_CONFIG_TABLE.TABLE.YOUNGEST_AGE);
   });
@@ -48,6 +47,6 @@ test.describe('Zero Config table', () => {
   test.skip('should allow an existing user to log in', async ({ zeroConfigPage }) => {
     await zeroConfigPage.login.loginButton.click(); // Click to open login form/modal
     await zeroConfigPage.login.login('user@example.com', 'password123');
-    await expect(zeroConfigPage.login.usernameInput).not.toBeVisible(); // Assuming login form disappears on success
+    await expect(zeroConfigPage.login.usernameInput).toBeHidden(); // Assuming login form disappears on success
   });
 });

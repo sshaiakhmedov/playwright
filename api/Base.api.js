@@ -11,19 +11,17 @@ export class BaseAPI {
             ...options,
             headers: {
                 ...options.headers,
-                ...(this.token && { 'Authorization': `Bearer ${this.token}` })
-            }
+                ...(this.token && { Authorization: `Bearer ${this.token}` }),
+            },
         };
         const response = await this.request.get(endpoint, mergedOptions);
-        return await this.validateAndParse(response, expectedStatus); 
+        return await this.validateAndParse(response, expectedStatus);
     }
 
       async post(endpoint, options = {}, expectedStatus = 200) {
         const response = await this.request.post(endpoint, options);
-        return await this.validateAndParse(response, expectedStatus); 
+        return await this.validateAndParse(response, expectedStatus);
     }
-
-
 
     /**
      * Validates the response status code and parses the body as JSON or text.
@@ -41,9 +39,9 @@ export class BaseAPI {
 
         // 2. Attempt to parse as JSON, fallback to text if it fails
         try {
-            return await response.json(); 
+            return await response.json();
         } catch (e) {
-            return await response.text(); 
+            return await response.text();
         }
     }
 }
