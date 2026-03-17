@@ -13,5 +13,8 @@ RUN npm install
 # Copy the rest of the files
 COPY . .
 
+# Set CI environment variable to true
+ENV CI=true
+
 # Default command
 CMD ["npm", "test"]

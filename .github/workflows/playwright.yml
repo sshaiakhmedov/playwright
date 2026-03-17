@@ -37,7 +37,7 @@ jobs:
     - name: Generate Allure Report
       if: always()
       run: |
-        npm run allure || echo "Allure report generation skipped"
+        npx allure generate ./allure-results --clean || echo "Allure report generation skipped"
       continue-on-error: true
     
     - name: Upload Playwright Report

@@ -12,7 +12,7 @@ const config = {
     ['list'], // Shows test statistics in the terminal
     ['allure-playwright'], // Keeps generating Allure reports
     // ['./util/customReporter.js'], // Your custom reporter // TODO: find out why i need it
-    ['html'], // The default Playwright HTML report
+    ['html', { open: 'never' }], // The default Playwright HTML report
   ],
 
   /* Shared options */
