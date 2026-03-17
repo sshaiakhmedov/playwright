@@ -18,6 +18,7 @@ After writing a new test (UI or API) or updating an existing one, you MUST WAIT 
     - The message should start with a short (<= 50 chars) summary in the imperative mood (e.g., `Add login negative test`, `Update find a doctor locator`).
     - Optionally, add a blank line and a longer description if the change is complex.
 5. **Commit**: Use `git commit -m "Your precise message"`.
+6. **Push**: Unless specified otherwise, always push the changes to the remote repository using `git push`.
 
 ## Example
 
@@ -30,11 +31,15 @@ git add pages/Login.page.js tests/login.spec.js
 
 # 3. Commit with a clear, imperative message
 git commit -m "Add negative login test scenarios"
+
+# 4. Push the changes
+git push
 ```
 
 ## MANDATORY CHECKLIST
 
-Before committing, verify:
+Before committing/pushing, verify:
 - [ ] The test runs successfully locally.
 - [ ] Global `AGENTS.md` rules are followed (no `test.only`, no `page.waitForTimeout`, etc.).
 - [ ] The commit message accurately reflects the changes.
+- [ ] The commit is pushed to the remote repository.
