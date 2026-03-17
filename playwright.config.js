@@ -1,6 +1,6 @@
 // @ts-check
 import * as dotenv from 'dotenv';
-dotenv.config();
+dotenv.config({ quiet: true });
 
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
 const config = {

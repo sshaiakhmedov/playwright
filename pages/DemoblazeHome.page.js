@@ -17,4 +17,17 @@ export class DemoblazeHome extends Base {
   get welcomeMessage() {
     return this.page.locator('#nameofuser');
   }
+
+  // --- Product Locators ---
+  getProductTitle(title) {
+    return this.page.locator('.card-title', { hasText: title });
+  }
+
+  getProductPrice(price) {
+    return this.page.locator('h5', { hasText: price });
+  }
+
+  getProductDescription(description) {
+    return this.page.locator('#article', { hasText: description });
+  }
 }
