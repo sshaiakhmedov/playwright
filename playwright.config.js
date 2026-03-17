@@ -25,15 +25,24 @@ const config = {
   },
   projects: [
     {
+      name: 'setup',
+      testMatch: /.*\.setup\.js/,
+      use: {
+        baseURL: 'https://www.demoblaze.com',
+      }
+    },
+    {
       timeout: 30000, // whole test (ms)
       expect: { timeout: 5000 }, // expect assertions
       name: 'UI Tests',
       testDir: './tests/ui',
+      dependencies: ['setup'],
       use: {
         browserName: 'chromium',
-        baseURL: 'https://www.sharp.com',
+        baseURL: 'https://www.demoblaze.com',
         navigationTimeout: 15000, // page.goto, reload, etc.
         actionTimeout: 10000, // click, fill, check, etc.
+        storageState: '.auth/user.json', // Automatically inject auth state
       },
     },
     {

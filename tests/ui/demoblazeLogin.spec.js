@@ -2,6 +2,8 @@ import { test, expect } from '../../util/fixtures';
 import { DEMOBLAZE_DATA } from '../../data/demoblaze.data.js';
 
 test.describe('Demoblaze Login Tests', () => {
+  // Override the storage state for this specific file, so the user starts unauthenticated
+  test.use({ storageState: { cookies: [], origins: [] } });
 
   const USERNAME = process.env.DEMOBLAZE_USERNAME;
   const PASSWORD = process.env.DEMOBLAZE_PASSWORD;
