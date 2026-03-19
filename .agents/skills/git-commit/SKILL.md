@@ -39,8 +39,9 @@ git push
 # 5. Check GitHub Actions status
 gh run list --limit 1
 
-# 6. If it fails, check logs and autofix
-# gh run view --log
+# 6. If it fails, check logs non-interactively and autofix
+# RUN_ID=$(gh run list --limit 1 --json databaseId -q '.[0].databaseId')
+# gh run view $RUN_ID --log-failed
 ```
 
 ## MANDATORY CHECKLIST
