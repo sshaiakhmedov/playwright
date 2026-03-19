@@ -19,6 +19,7 @@ After writing a new test (UI or API) or updating an existing one, you MUST WAIT 
     - Optionally, add a blank line and a longer description if the change is complex.
 5. **Commit**: Use `git commit -m "Your precise message"`.
 6. **Push**: Unless specified otherwise, always push the changes to the remote repository using `git push`.
+7. **Check GitHub Actions Status**: After pushing, check the status of the latest GitHub Actions workflow run (e.g., using `gh run watch` or `gh run list --limit 1`). If the run **fails**, you must automatically review the failure logs and **autofix** the issue by applying the necessary corrections and pushing them.
 
 ## Example
 
@@ -34,6 +35,12 @@ git commit -m "Add negative login test scenarios"
 
 # 4. Push the changes
 git push
+
+# 5. Check GitHub Actions status
+gh run list --limit 1
+
+# 6. If it fails, check logs and autofix
+# gh run view --log
 ```
 
 ## MANDATORY CHECKLIST
@@ -43,3 +50,4 @@ Before committing/pushing, verify:
 - [ ] Global `AGENTS.md` rules are followed (no `test.only`, no `page.waitForTimeout`, etc.).
 - [ ] The commit message accurately reflects the changes.
 - [ ] The commit is pushed to the remote repository.
+- [ ] GitHub Actions status is checked, and any failures are autofixed.
