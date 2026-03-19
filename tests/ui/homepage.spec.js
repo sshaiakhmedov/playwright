@@ -8,7 +8,7 @@ test.describe('Sharp Homepage', () => {
   });
 
   test('landing page title', async ({ homePage }) => {
-    await expect(homePage.page).toHaveTitle('Intentional Failure');
+    await expect(homePage.page).toHaveTitle(HOME_DATA.title);
   });
 
   test('Top main nav links are visible', async ({ homePage }) => {
