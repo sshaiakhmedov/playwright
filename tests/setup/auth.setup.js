@@ -3,9 +3,9 @@ import { test as setup, expect } from '../../util/fixtures.js';
 const authFile = '.auth/user.json';
 
 setup('authenticate and save state', async ({ demoblazeHomePage, page }) => {
-  // Use environment variables for credentials, or fall back to 'test'/'test' for CI
-  const USERNAME = process.env.DEMOBLAZE_USERNAME || 'test';
-  const PASSWORD = process.env.DEMOBLAZE_PASSWORD || 'test';
+  // Use environment variables for credentials
+  const USERNAME = process.env.DEMOBLAZE_USERNAME;
+  const PASSWORD = process.env.DEMOBLAZE_PASSWORD;
 
   // 1. Navigate to the page
   await demoblazeHomePage.goto();
