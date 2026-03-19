@@ -5,8 +5,8 @@ test.describe('Demoblaze Login Tests', () => {
   // Override the storage state for this specific file, so the user starts unauthenticated
   test.use({ storageState: { cookies: [], origins: [] } });
 
-  const USERNAME = process.env.DEMOBLAZE_USERNAME;
-  const PASSWORD = process.env.DEMOBLAZE_PASSWORD;
+  const USERNAME = process.env.DEMOBLAZE_USERNAME || 'test';
+  const PASSWORD = process.env.DEMOBLAZE_PASSWORD || 'test';
 
   test('Happy Path: User can log in with valid credentials', async ({ demoblazeHomePage }) => {
     await test.step('Navigate to homepage', async () => {
