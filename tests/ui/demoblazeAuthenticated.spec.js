@@ -1,7 +1,7 @@
 import { test, expect } from '../../util/fixtures';
 
 test.describe('Demoblaze Authenticated Tests', () => {
-  const USERNAME = process.env.DEMOBLAZE_USERNAME;
+  const USERNAME = process.env.DEMOBLAZE_USERNAME || 'test';
 
   test('Verify user is already logged in via storageState', async ({ demoblazeHomePage }) => {
     // We go straight to the homepage without touching the login modal
