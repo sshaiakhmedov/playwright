@@ -9,6 +9,6 @@ export const DEMOBLAZE_DATA = {
     { description: 'space username and valid password', username: ' ', password: validPass, errorMessage: 'Wrong password.' }, // App returns Wrong password. instead of User does not exist.
     { description: 'invalid username with special characters and valid password', username: '!@#$%^&*()', password: validPass, errorMessage: 'Wrong password.' }, // App returns Wrong password. instead of User does not exist.
     { description: 'valid user and very long invalid password', username: validUser, password: 'a'.repeat(100), errorMessage: 'Wrong password.' },
-    { description: 'valid user and uppercase password', username: validUser, password: validPass.toUpperCase(), errorMessage: 'Wrong password.' },
+    { description: 'valid user and uppercase password', username: validUser, password: (validPass || '').toUpperCase(), errorMessage: 'Wrong password.' },
   ],
 };
