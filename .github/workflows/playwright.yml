@@ -32,7 +32,6 @@ jobs:
     
     - name: Run Playwright tests
       run: npx playwright test
-      continue-on-error: true
     
     - name: Generate Allure Report
       if: always()
@@ -85,7 +84,6 @@ jobs:
     
     - name: Run tests in Docker
       run: docker run --rm pw-tests
-      continue-on-error: true
     
     - name: Extract test results from Docker
       if: always()
