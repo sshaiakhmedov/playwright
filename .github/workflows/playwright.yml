@@ -32,6 +32,9 @@ jobs:
     
     - name: Run Playwright tests
       run: npx playwright test
+      env:
+        DEMOBLAZE_USERNAME: ${{ secrets.DEMOBLAZE_USERNAME }}
+        DEMOBLAZE_PASSWORD: ${{ secrets.DEMOBLAZE_PASSWORD }}
     
     - name: Generate Allure Report
       if: always()
@@ -83,7 +86,10 @@ jobs:
       run: docker build -t pw-tests .
     
     - name: Run tests in Docker
-      run: docker run --rm pw-tests
+      run: docker run --rm -e DEMOBLAZE_USERNAME -e DEMOBLAZE_PASSWORD pw-tests
+      env:
+        DEMOBLAZE_USERNAME: ${{ secrets.DEMOBLAZE_USERNAME }}
+        DEMOBLAZE_PASSWORD: ${{ secrets.DEMOBLAZE_PASSWORD }}
     
     - name: Extract test results from Docker
       if: always()
