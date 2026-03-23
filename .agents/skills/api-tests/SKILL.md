@@ -26,6 +26,14 @@ curl http://localhost:3000/
 # Or just run the tests: npm run test:api
 ```
 
+## Required Test Coverage Strategy
+
+When asked to write API tests for an endpoint, you MUST generate scenarios covering the following:
+1. **Happy Path:** Valid request returns `200/201` and the correct data schema.
+2. **Negative Path:** Invalid data (e.g., missing required fields, wrong data types) returns `400` Bad Request.
+3. **Authentication/Authorization:** Missing, invalid, or expired tokens returns `401` or `403`.
+4. **Edge/Boundary Cases:** Max length strings, empty datasets, etc.
+
 ## How to Add a new API Spec
 
 *** FLOW: ***

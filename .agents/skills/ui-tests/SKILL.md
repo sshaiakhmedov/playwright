@@ -5,6 +5,14 @@ description: Guidelines on how to write Playwright UI tests, best practices, MUS
 
 # UI Test Creation Guidelines
 
+## Required Test Coverage Strategy
+
+When asked to write UI tests for a feature, you MUST generate scenarios covering the following:
+1. **Happy Path:** Successful completion of the core user flow (e.g., successful login, successful checkout).
+2. **Negative Path:** Form validation errors, invalid credentials, or rejecting incorrect inputs.
+3. **State Variations:** Empty states, loading states, interactions with disabled buttons, or handled API failures.
+4. **Edge/Boundary Cases:** Boundary values in forms or edge navigation paths.
+
 ## How to Add a new UI spec or test
 
 *** FLOW: ***
