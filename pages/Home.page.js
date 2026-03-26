@@ -1,6 +1,4 @@
-import { expect } from '@playwright/test';
 import { Base } from './Base.page.js';
-import { FAD_DATA } from '../data/postman.data.js';
 
 export class Home extends Base {
   /**

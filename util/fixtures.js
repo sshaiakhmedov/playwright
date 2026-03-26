@@ -1,6 +1,6 @@
 import { test as base, expect } from '@playwright/test';
 import { ApiManager } from '../api/ApiManager.js';
-import { Home, FindADoctor, ZeroConfig, FeatureEnableDisable, DemoblazeHome } from '../pages';
+import { Home, FindADoctor, ZeroConfig, FeatureEnableDisable, DemoblazeHome, AmplifyHome } from '../pages';
 
 /**
  * @typedef {Object} MyFixtures
@@ -10,6 +10,7 @@ import { Home, FindADoctor, ZeroConfig, FeatureEnableDisable, DemoblazeHome } fr
  * @property {ZeroConfig} zeroConfigPage
  * @property {FeatureEnableDisable} featureEnableDisablePage
  * @property {DemoblazeHome} demoblazeHomePage
+ * @property {AmplifyHome} amplifyHomePage
  */
 
 /** @type {import('@playwright/test').TestType<MyFixtures, {}>} */
@@ -37,6 +38,10 @@ export const test = base.extend({
   demoblazeHomePage: async ({ page }, use) => {
     const demoblazeHome = new DemoblazeHome(page);
     await use(demoblazeHome);
+  },
+  amplifyHomePage: async ({ page }, use) => {
+    const amplifyHome = new AmplifyHome(page);
+    await use(amplifyHome);
   },
 });
 

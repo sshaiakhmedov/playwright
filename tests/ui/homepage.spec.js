@@ -1,5 +1,4 @@
 import { test, expect } from '../../util/fixtures';
-import { URLS, LABELS } from '../../constants';
 import { HOME_DATA } from '../../data/home.data';
 
 test.describe('Sharp Homepage', () => {
