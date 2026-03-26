@@ -34,12 +34,7 @@ When asked to write API tests for an endpoint, you MUST generate scenarios cover
 3. **Authentication/Authorization:** Missing, invalid, or expired tokens returns `401` or `403`.
 4. **Edge/Boundary Cases:** Max length strings, empty datasets, etc.
 
-## How to Add a new API Spec
-
-*** FLOW: ***
-   1. go over the MUST DO and NEVER DO sections.
-   2. go over the MANDATORY VERIFICATION CHECKLIST.
-   3. go over the FINAL CHECK.
+## Guidelines & Rules
 
 *** MUST DO: ***
 1. **Use `request` fixture** instead of third-party libraries: `test('api test', async ({ request }) => { ... })`.
@@ -53,12 +48,10 @@ When asked to write API tests for an endpoint, you MUST generate scenarios cover
 1. Never store massive JSON payloads directly inside the `test()` block.
 2. Never chain UI interactions in the same test block as a pure API test unless you are specifically testing UI-API boundaries (in which case, it's an E2E test, not an API test).
 
-**MANDATORY VERIFICATION CHECKLIST:** Before finalizing any API Test implementation, you MUST explicitly go through this checklist and verify it to the user:
-   - [ ] Global `AGENTS.md` rules are followed.
-   - [ ] Request bodies/Complex parameters are extracted to `data/` or generated via factory functions.
-   - [ ] API endpoints are stored as constants or read from config if they change between environments.
-   - [ ] Using `expect(response.ok()).toBeTruthy()` or explicitly checking the `status()` before checking the response JSON.
-   - [ ] Descriptive variable names for parsed body data (e.g., `const userData = await response.json();` not `const data = ...`).
+## Execution Workflow
+
+For the exact step-by-step procedure to execute when creating an API test, see:
+- Run `/create-api-test` (located in `.agents/workflows/create-api-test.md`)
 
 ## Example Usage
 
