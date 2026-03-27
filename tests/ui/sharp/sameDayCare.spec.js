@@ -30,8 +30,11 @@ test.describe('Same-day care navigation menu', () => {
   test('virtual care Get started opens new page in the same tab', async ({ sameDayCarePage }) => {
     const vc = sameDayCarePage.virtualCare;
 
-    // Click Get started
-    await vc.getStartedBtn.click();
+    // Click Get started and wait for navigation
+    await Promise.all([
+      sameDayCarePage.page.waitForURL(SAME_DAY_CARE_DATA.VIRTUAL_CARE_URL_REGEX),
+      vc.getStartedBtn.click(),
+    ]);
 
     // Verify it opens a new page in the same tab
     await expect(sameDayCarePage.page).toHaveURL(SAME_DAY_CARE_DATA.VIRTUAL_CARE_URL_REGEX);

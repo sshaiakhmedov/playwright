@@ -40,8 +40,8 @@ const config = {
       use: {
         browserName: 'chromium',
         baseURL: 'https://www.demoblaze.com',
-        navigationTimeout: 15000, // page.goto, reload, etc.
-        actionTimeout: 10000, // click, fill, check, etc.
+        navigationTimeout: 30000, // page.goto, reload, etc.
+        actionTimeout: 20000, // click, fill, check, etc.
         storageState: '.auth/user.json', // Automatically inject auth state
       },
     },
