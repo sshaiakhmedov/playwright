@@ -6,3 +6,4 @@ export { FeatureEnableDisable } from './FeatureEnableDisable.page.js';
 export { DemoblazeHome } from './DemoblazeHome.page.js';
 export { AmplifyHome } from './AmplifyHome.page.js';
 export { SameDayCare } from './SameDayCare.page.js';
+export { VirtualCare } from './VirtualCare.page.js';

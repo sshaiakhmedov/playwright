@@ -39,4 +39,32 @@ test.describe('Same-day care navigation menu', () => {
     // Verify it opens a new page in the same tab
     await expect(sameDayCarePage.page).toHaveURL(SAME_DAY_CARE_DATA.VIRTUAL_CARE_URL_REGEX);
   });
+
+  test('virtual care page FAQ accordions expand and retain text', async ({ sameDayCarePage, virtualCarePage }) => {
+    const vc = sameDayCarePage.virtualCare;
+
+    // Navigate to Virtual Care page
+    await Promise.all([
+      sameDayCarePage.page.waitForURL(SAME_DAY_CARE_DATA.VIRTUAL_CARE_URL_REGEX),
+      vc.getStartedBtn.click(),
+    ]);
+
+    // Get all accordion buttons
+    const accordions = await virtualCarePage.accordionButtons.all();
+    expect(accordions.length).toBeGreaterThan(0);
+
+    for (const accordion of accordions) {
+      const initialText = await accordion.innerText();
+
+      // Click the chevron/accordion
+      await accordion.click();
+
+      // Verify original text still exists
+      await expect(accordion).toContainText(initialText.trim());
+
+      // Verify new text (content) appears
+      const content = await virtualCarePage.getAccordionContent(accordion);
+      await expect(content).toBeVisible();
+    }
+  });
 });

@@ -1,6 +1,6 @@
 import { test as base, expect } from '@playwright/test';
 import { ApiManager } from '../api/ApiManager.js';
-import { Home, FindADoctor, ZeroConfig, FeatureEnableDisable, DemoblazeHome, AmplifyHome, SameDayCare } from '../pages/index.js';
+import { Home, FindADoctor, ZeroConfig, FeatureEnableDisable, DemoblazeHome, AmplifyHome, SameDayCare, VirtualCare } from '../pages/index.js';
 
 /**
  * @typedef {Object} MyFixtures
@@ -12,6 +12,7 @@ import { Home, FindADoctor, ZeroConfig, FeatureEnableDisable, DemoblazeHome, Amp
  * @property {DemoblazeHome} demoblazeHomePage
  * @property {AmplifyHome} amplifyHomePage
  * @property {SameDayCare} sameDayCarePage
+ * @property {VirtualCare} virtualCarePage
  */
 
 /** @type {import('@playwright/test').TestType<MyFixtures, {}>} */
@@ -47,6 +48,10 @@ export const test = base.extend({
   sameDayCarePage: async ({ page }, use) => {
     const sameDayCare = new SameDayCare(page);
     await use(sameDayCare);
+  },
+  virtualCarePage: async ({ page }, use) => {
+    const virtualCare = new VirtualCare(page);
+    await use(virtualCare);
   },
 });
 
