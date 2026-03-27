@@ -16,6 +16,7 @@ These rules apply globally to ALL tasks (UI tests, API tests, fixing bugs, writi
 - **DRY UI Components:** Use components from `components/` when the same UI appears on 2+ pages.
 - **Fixtures:** Leverage custom fixtures from `util/fixtures.js` for Page Objects and Components.
 - **Environment config:** Always use the `.env` file for storing Base URLs, tokens, and API keys.
+- **Project-Based Folders:** Organize all test specs into subdirectories within `tests/ui/` or `tests/api/` based on the project/website being tested (e.g., `tests/ui/sharp/`, `tests/ui/demoblaze/`).
 
 ### Page Objects Deep Dive
 

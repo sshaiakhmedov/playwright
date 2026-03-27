@@ -18,7 +18,7 @@ When adding a new API Spec or test, follow these exact steps:
    - If you are calling the same endpoint across multiple tests, wrap those calls into an API client helper in an `api/` or `clients/` folder.
 
 4. **Write the Test**:
-   - Create the spec file.
+   - Create the spec file in the appropriate project folder under `tests/api/`.
    - Use the `request` fixture: `test('api test', async ({ request }) => { ... })`.
    - Ensure you use correct assertions: e.g., `expect(response.ok()).toBeTruthy()`.
 

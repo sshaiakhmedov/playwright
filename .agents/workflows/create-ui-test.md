@@ -17,7 +17,7 @@ When writing a new UI Spec or test, follow these exact steps:
    - Ensure the new page object is registered in `util/fixtures.js`.
 
 3. **Write the Test**:
-   - Create the `.spec.js` file.
+   - Create the `.spec.js` file in the appropriate project folder under `tests/ui/`.
    - Use fixtures from `util/fixtures.js` instead of raw `@playwright/test`.
    - Use `beforeEach` or `beforeAll` hooks if appropriate.
 

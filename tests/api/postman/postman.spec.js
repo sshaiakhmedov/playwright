@@ -1,5 +1,5 @@
 // tests/api/postman.spec.js
-import { test, expect } from '../../util/fixtures';
+import { test, expect } from '../../../util/fixtures';
 
 test.describe('Postman Echo API Tests', () => {
   test('GET with 2 query parameters returns 200', async ({ api }) => {

@@ -25,7 +25,8 @@ When asked to write UI tests for a feature, you MUST generate scenarios covering
 7. use page objects from `pages/` folder.
 8. use components from `components/` folder.
 9. If a new spec implies new Page Object, Component, Fixture, Constant, Data, or Locator, create it in the appropriate folder.
-10. **Group related elements:** In Page Objects, if elements relate to one module/block, nest all related locators inside a single getter object. This makes reading and navigation clearer (e.g., see `Home.page.js` or `SameDayCare.page.js` for an example implementations).
+10. **Organize specs by folder:** Place the `.spec.js` file in a project-specific subdirectory within `tests/ui/` (e.g., `tests/ui/sharp/`).
+11. **Group related elements:** In Page Objects, if elements relate to one module/block, nest all related locators inside a single getter object. This makes reading and navigation clearer (e.g., see `Home.page.js` or `SameDayCare.page.js` for an example implementations).
 
 *(Note: For generic anti-patterns like "No locators/constants in specs", refer to the global `AGENTS.md` rules.)*
 

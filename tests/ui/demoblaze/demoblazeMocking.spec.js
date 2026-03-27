@@ -1,4 +1,4 @@
-import { test, expect } from '../../util/fixtures';
+import { test, expect } from '../../../util/fixtures';
 
 test.describe('Demoblaze API Mocking', () => {
   test('Mock the /entries API to display a custom Playwright Product', async ({ demoblazeHomePage, page }) => {

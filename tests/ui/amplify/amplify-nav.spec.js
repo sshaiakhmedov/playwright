@@ -1,4 +1,4 @@
-import { test, expect } from '../../util/fixtures.js';
+import { test, expect } from '../../../util/fixtures.js';
 
 test.describe.skip('Amplify Top Navigation', () => {
   // As per requirement: you always need to go back and click nav menu from the main page

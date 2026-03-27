@@ -1,4 +1,4 @@
-import { test, expect } from '../../util/fixtures';
+import { test, expect } from '../../../util/fixtures';
 
 test.describe('Demoblaze Authenticated Tests', () => {
   const USERNAME = process.env.DEMOBLAZE_USERNAME || 'test';

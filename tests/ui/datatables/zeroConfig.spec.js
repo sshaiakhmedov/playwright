@@ -1,5 +1,5 @@
-import { test, expect } from '../../util/fixtures';
-import { ZERO_CONFIG_TABLE } from '../../data/zeroConfigTable.data';
+import { test, expect } from '../../../util/fixtures';
+import { ZERO_CONFIG_TABLE } from '../../../data/zeroConfigTable.data';
 
 test.describe('Zero Config table', () => {
   test.beforeEach(async ({ zeroConfigPage }) => {

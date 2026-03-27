@@ -1,5 +1,5 @@
-import { test, expect } from '../../util/fixtures.js';
-import { SAME_DAY_CARE_DATA } from '../../data/sameDayCare.data.js';
+import { test, expect } from '../../../util/fixtures.js';
+import { SAME_DAY_CARE_DATA } from '../../../data/sameDayCare.data.js';
 
 test.describe('Same-day care navigation menu', () => {
   test.beforeEach(async ({ homePage }) => {

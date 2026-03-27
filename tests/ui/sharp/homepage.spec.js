@@ -1,5 +1,5 @@
-import { test, expect } from '../../util/fixtures';
-import { HOME_DATA } from '../../data/home.data';
+import { test, expect } from '../../../util/fixtures';
+import { HOME_DATA } from '../../../data/home.data';
 
 test.describe('Sharp Homepage', () => {
   test.beforeEach(async ({ homePage }) => {

@@ -42,6 +42,7 @@ When asked to write API tests for an endpoint, you MUST generate scenarios cover
 3. **Use API Helpers/Clients:** If you are calling the same endpoint across multiple tests, wrap those calls into an API client helper in an `api/` or `clients/` folder.
 4. **Environment Variables:** Use the `.env` file for storing Base URLs, tokens, and API keys. Fetch them via `process.env`.
 5. **Use correct assertions:** Use Playwright's `expect` assertions (e.g., `expect(response.ok()).toBeTruthy()`, `expect(response.status()).toBe(200)`).
+6. **Organize tests by folder:** Place the spec file in a project-specific subdirectory within `tests/api/` (e.g., `tests/api/postgrest/`).
 
 *** NEVER DO THE FOLLOWING: ***
 *(Note: For generic anti-patterns like "No hardcoded credentials", refer to the global `AGENTS.md` rules.)*

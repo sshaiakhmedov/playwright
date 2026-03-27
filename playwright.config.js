@@ -5,7 +5,7 @@ dotenv.config({ quiet: true });
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
 const config = {
   // Limit the number of workers on CI, use default locally
-  workers: process.env.CI ? 5 : 1,
+  workers: process.env.CI ? 5 : 5,
 
   // Use multiple reporters
   reporter: [
