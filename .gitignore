@@ -5,3 +5,4 @@ playwright-report/
 .env
 test-results/
 .auth/
+debug_output*.txt

@@ -271,4 +271,28 @@ export class Base {
   async getCount(locator) {
     return await locator.count();
   }
+
+  /**
+   * Helper to get all text options for a specific ARIA combobox dropdown.
+   * Assumes the dropdown reveals an associated <ul role="listbox"> containing options.
+   * @param {import('@playwright/test').Locator} dropdownLocator
+   * @returns {Promise<string[]>}
+   */
+  async getOptionsForDropdown(dropdownLocator) {
+    await dropdownLocator.click();
+
+    // Since comboboxes (buttons/inputs) cannot have <li> children, the options
+    // appear in an associated <ul role="listbox"> that becomes visible.
+    const activeListbox = this.page.getByRole('listbox').filter({ state: 'visible' });
+    const optionsLocator = activeListbox.getByRole('option');
+
+    // Wait for the options to appear in the active listbox
+    await optionsLocator.first().waitFor({ state: 'visible' });
+
+    const options = await optionsLocator.allTextContents();
+
+    // Close dropdown (click again or escape)
+    await this.page.keyboard.press('Escape');
+    return options.map(opt => opt.trim()).filter(opt => opt !== '');
+  }
 }

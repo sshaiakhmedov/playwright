@@ -1,4 +1,38 @@
 export const SAME_DAY_CARE_DATA = {
   HOME_URL: 'https://www.sharp.com/',
   VIRTUAL_CARE_URL_REGEX: /virtual-care/,
+  SYMPTOMS_HEADER_TEXT: 'What symptoms can be treated at a virtual care visit?',
+  INSURANCE_FORM: {
+    URL_REGEX: /virtual-urgent-care\/insurance/,
+    LABELS: {
+      FIRST_NAME: 'First name',
+      LAST_NAME: 'Last name',
+      BIRTHDATE: 'Birthdate',
+      GENDER: 'Gender',
+      INSURANCE_COMPANY: 'Insurance company',
+      INSURANCE_POLICY_NUMBER: 'Insurance policy number',
+      POLICYHOLDER: 'Are you the policyholder?*',
+    },
+    PLACEHOLDERS: {
+      FIRST_NAME: 'First name',
+      LAST_NAME: 'Last name',
+      BIRTHDATE: 'MM/DD/YYYY',
+      INSURANCE_POLICY_NUMBER: 'Insurance policy number',
+    },
+    GENDER_OPTIONS: ['Select gender', 'Male', 'Female', 'Nonbinary'],
+    INSURANCE_OPTIONS: [
+      'Select insurance company',
+      'Aetna',
+      'Anthem Blue Cross',
+      'Blue Shield of California (including Promise Health Plan)',
+      'ChoiceCare/Network (Humana)',
+      'CIGNA',
+      'Health Net',
+      'Medi-Cal',
+      'Medicare',
+      'Sharp Health Plan',
+      'TRICARE',
+      'United Healthcare (including Secure Horizons and PacifiCare)',
+    ],
+  },
 };

@@ -1,5 +1,5 @@
-import { test, expect } from '../../../util/fixtures.js';
-import { SAME_DAY_CARE_DATA } from '../../../data/sameDayCare.data.js';
+import { test, expect } from '../../../../util/fixtures.js';
+import { SAME_DAY_CARE_DATA } from '../../../../data/sameDayCare.data.js';
 
 test.describe('Same-day care navigation menu', () => {
   test.beforeEach(async ({ homePage }) => {
@@ -66,5 +66,26 @@ test.describe('Same-day care navigation menu', () => {
       const content = await virtualCarePage.getAccordionContent(accordion);
       await expect(content).toBeVisible();
     }
+  });
+
+  test('various symptoms and conditions hyperlink scrolls to the related module', async ({ sameDayCarePage, virtualCarePage }) => {
+    // Navigate to Virtual Care page
+    await Promise.all([
+      sameDayCarePage.page.waitForURL(SAME_DAY_CARE_DATA.VIRTUAL_CARE_URL_REGEX),
+      sameDayCarePage.virtualCare.getStartedBtn.click(),
+    ]);
+
+    // Click the 'various symptoms and conditions' link
+    await virtualCarePage.symptomsLink.click();
+
+    // Verify the header is visible and in viewport after clicking
+    await expect(virtualCarePage.symptomsSectionHeader).toBeVisible();
+    await expect(virtualCarePage.symptomsSectionHeader).toHaveText(SAME_DAY_CARE_DATA.SYMPTOMS_HEADER_TEXT);
+    await expect(virtualCarePage.symptomsSectionHeader).toBeInViewport();
+
+    // Verification of symptoms list
+    await expect(virtualCarePage.symptomsList.first()).toBeVisible();
+    const count = await virtualCarePage.symptomsList.count();
+    expect(count).toBeGreaterThan(0);
   });
 });
