@@ -1,14 +1,14 @@
 import { test, expect } from '../../../../util/fixtures.js';
 import { SAME_DAY_CARE_DATA } from '../../../../data/sameDayCare.data.js';
 
-test.describe('Same-day care navigation menu', () => {
+test.describe('Same-day care navigation menu @SHARP-9999', () => {
   test.beforeEach(async ({ homePage }) => {
     // Go to home page and navigate to same-day care
     await homePage.goto(SAME_DAY_CARE_DATA.HOME_URL);
     await homePage.topMainNavLinks.sameDayCare.click();
   });
 
-  test('main blocks are visible', async ({ sameDayCarePage }) => {
+  test('main blocks are visible @SHARP-1234', async ({ sameDayCarePage }) => {
     // Verify 3 main blocks are visible
     await expect(sameDayCarePage.mainBlocks.virtualCare).toBeVisible();
     await expect(sameDayCarePage.mainBlocks.urgentCare).toBeVisible();

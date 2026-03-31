@@ -29,6 +29,7 @@
     "test:headed": "npx playwright test --headed",
     "allure": "allure generate ./allure-results --clean && allure open ./allure-report",
     "lint": "eslint .",
+    "html_report": "npx playwright show-report",
     "lint:fix": "eslint . --fix",
     "prepare": "husky"
   },

@@ -8,7 +8,12 @@ test.describe('New Patient Insurance Form', () => {
     await homePage.topMainNavLinks.sameDayCare.click();
   });
 
-  test('I\'m a new patient button opens insurance form and verifies all fields', async ({ sameDayCarePage, virtualCarePage, insuranceVerificationPage }) => {
+  test('I\'m a new patient button opens insurance form and verifies all fields', {
+    annotation: {
+      type: 'issue',
+      description: 'https://jira.example.com/browse/SHARP-1234',
+    },
+  }, async ({ sameDayCarePage, virtualCarePage, insuranceVerificationPage }) => {
     // Navigate to Virtual Care page
     await Promise.all([
       sameDayCarePage.page.waitForURL(SAME_DAY_CARE_DATA.VIRTUAL_CARE_URL_REGEX),

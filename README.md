@@ -68,6 +68,26 @@ npm run test:debug
 npm test -- --debug
 ```
 
+### Run Tests by Tag / Ticket (Grep)
+
+You can tag test titles or `test.describe` blocks to easily run subsets of tests (e.g. for a specific Jira ticket). 
+
+Example in code:
+```javascript
+test.describe('Same-day care navigation menu @SHARP-9999', () => { ... });
+
+test('main blocks are visible @SHARP-1234', async ({ page }) => { ... });
+```
+
+Run tests matching the tag:
+```bash
+npx playwright test --grep "@SHARP-9999"
+```
+Or with your npm script:
+```bash
+npm test -- --grep "@SHARP-1234"
+```
+
 ## Available Flags & Options
 
 Pass any Playwright flag to customize test execution:
