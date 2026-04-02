@@ -19,14 +19,15 @@ When asked to write UI tests for a feature, you MUST generate scenarios covering
 1. **Create/extend a page object** in `pages/` (or reuse an existing one).
 2. **Use fixtures** from `util/fixtures.js` instead of raw `@playwright/test`.
 3. Try to use `beforeEach` or `beforeAll` hooks if needed.
-4. Use the browser tool to explore the DOM before writing any locators.
-5. use `.env` file for environment variables.
-6. read constants from `constants/` or `data/` folder as per the case.
-7. use page objects from `pages/` folder.
-8. use components from `components/` folder.
-9. If a new spec implies new Page Object, Component, Fixture, Constant, Data, or Locator, create it in the appropriate folder.
-10. **Organize specs by folder:** Place the `.spec.js` file in a project-specific subdirectory within `tests/ui/` (e.g., `tests/ui/sharp/`).
-11. **Group related elements:** In Page Objects, if elements relate to one module/block, nest all related locators inside a single getter object. This makes reading and navigation clearer (e.g., see `Home.page.js` or `SameDayCare.page.js` for an example implementations).
+4. **Use Deep Links!** Do not waste test execution time clicking through the UI just to reach the feature you are testing. Always use direct navigation (`page.goto(DEEP_URL)`) in `beforeEach` so the test starts directly on the form/UI module being tested. Test UI navigation only when you are explicitly writing a "Navigation" test.
+5. Use the browser tool to explore the DOM before writing any locators.
+6. use `.env` file for environment variables.
+7. read constants from `constants/` or `data/` folder as per the case.
+8. use page objects from `pages/` folder.
+9. use components from `components/` folder.
+10. If a new spec implies new Page Object, Component, Fixture, Constant, Data, or Locator, create it in the appropriate folder.
+11. **Organize specs by folder:** Place the `.spec.js` file in a project-specific subdirectory within `tests/ui/` (e.g., `tests/ui/sharp/`).
+12. **Group related elements:** In Page Objects, if elements relate to one module/block, nest all related locators inside a single getter object. This makes reading and navigation clearer (e.g., see `Home.page.js` or `SameDayCare.page.js` for an example implementations).
 
 *(Note: For generic anti-patterns like "No locators/constants in specs", refer to the global `AGENTS.md` rules.)*
 

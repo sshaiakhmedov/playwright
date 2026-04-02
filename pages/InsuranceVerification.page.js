@@ -13,6 +13,10 @@ export class InsuranceVerification extends Base {
   get insurancePolicyNumberInput() { return this.page.getByPlaceholder('Insurance policy number'); }
   get policyholderYesRadio() { return this.page.getByRole('radio', { name: 'Yes' }); }
   get policyholderNoRadio() { return this.page.getByRole('radio', { name: 'No' }); }
+  get continueButton() { return this.page.getByRole('button', { name: 'Continue' }); }
+
+  get moreInformationHeading() { return this.page.getByText('We need more information'); }
+  get verificationErrorText() { return this.page.getByText('We weren\'t able to verify your insurance.'); }
 
   get labels() {
     return {
@@ -28,5 +32,9 @@ export class InsuranceVerification extends Base {
 
   get dropdownOptions() {
     return this.page.getByRole('option');
+  }
+
+  getOptionByName(optionName) {
+    return this.page.getByRole('option', { name: optionName, exact: true });
   }
 }

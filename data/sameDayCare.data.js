@@ -34,5 +34,15 @@ export const SAME_DAY_CARE_DATA = {
       'TRICARE',
       'United Healthcare (including Secure Horizons and PacifiCare)',
     ],
+    INVALID_SUBMISSION_DATA: {
+      FIRST_NAME: 'John',
+      LAST_NAME: 'Doe',
+      BIRTHDATE: '01/01/1980',
+      GENDER_SELECTION: 'Male',
+      INSURANCE_COMPANY_SELECTION: 'Aetna',
+      INSURANCE_POLICY_NUMBER: '123456789',
+      EXPECTED_ERROR_HEADING: 'We need more information',
+      EXPECTED_ERROR_TEXT: 'We weren\'t able to verify your insurance.',
+    },
   },
 };

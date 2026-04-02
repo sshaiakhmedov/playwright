@@ -21,16 +21,19 @@ When writing a new UI Spec or test, follow these exact steps:
    - Use fixtures from `util/fixtures.js` instead of raw `@playwright/test`.
    - Use `beforeEach` or `beforeAll` hooks if appropriate.
 
-4. **Generate Scenarios**: Ensure you cover:
-   - Happy Path (Core user flow)
-   - Negative Path (Validation errors, invalid inputs)
-   - State Variations (Empty states, loading states, API failures)
-   - Edge/Boundary Cases
+4. **Generate Scenarios based on UI Module Type**:
+   - You MUST read the `.agents/skills/ui-tests/standard-scenarios.md` file FIRST. 
+   - Identify the correct UI Module Type (Form, Search, Navigation, etc.) and generate the strict, standardized combinations of Happy, Negative, and Edge case scenarios listed in that file.
 
 5. **Local Run**:
    - Look at `package.json` scripts.
    - Run in **headless** mode first.
    - If headless passes, run in a **headed** mode to visually confirm.
+
+6. **AI Code Review (MANDATORY)**:
+   - BEFORE completing the workflow, you MUST review the `.spec.js` code you just wrote.
+   - If the strings `page.locator`, `page.getBy`, `page.$`, or `locator(` exist **ANYWHERE** inside the `.spec.js` file, you have violated the Page Object Model rule.
+   - **Self-Correct:** You MUST pause, refactor those raw locators back into the `pages/` object, and replace them with standard getter/method calls in the spec before presenting the code to the user.
 
 ## MANDATORY VERIFICATION CHECKLIST:
 - [ ] Global `AGENTS.md` rules are followed (No locators, data, or env vars in specs; Page Objects and Components used correctly).
