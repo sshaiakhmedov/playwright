@@ -74,8 +74,8 @@ test.describe('New Patient Insurance Form', () => {
 
   for (const gender of gendersToTest) {
     test(`Negative: Dummy Aetna redirects to "We need more information" page [Gender: ${gender}]`, async ({ insuranceVerificationPage }) => {
-      // Bypassing CI bot-protection rate limits for heavy data-driven loops
-      if (process.env.CI === 'true' && gender !== 'Male') {
+      // Skip all dummy submission variations in CI because Sharp.com WAF blocks Playwright datacenter IPs entirely
+      if (process.env.CI === 'true') {
         test.skip();
       }
 
