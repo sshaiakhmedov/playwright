@@ -1,0 +1,248 @@
+# Test info
+
+- Name: New Patient Insurance Form >> Negative: Dummy Aetna redirects to "We need more information" page [Gender: Nonbinary]
+- Location: /home/runner/work/playwright/playwright/tests/ui/sharp/same-day-care/newPatient.spec.js:77:5
+
+# Error details
+
+```
+Error: expect(locator).toBeVisible()
+
+Locator: getByText('We need more information')
+Expected: visible
+Received: <element(s) not found>
+Call log:
+  - expect.toBeVisible with timeout 30000ms
+  - waiting for getByText('We need more information')
+
+    at /home/runner/work/playwright/playwright/tests/ui/sharp/same-day-care/newPatient.spec.js:103:49
+```
+
+# Page snapshot
+
+```yaml
+- banner:
+  - link "Sharp logo":
+    - /url: /
+    - img
+- main:
+  - heading "Verify your insurance" [level=1]
+  - paragraph: Please enter your information exactly how it appears on your insurance card. You may be asked to provide this again.
+  - text: First name*
+  - textbox "First name"
+  - text: First name is required. Last name*
+  - textbox "Last name": Doe
+  - text: Birthdate*
+  - textbox "Birthdate": 01/01/1980
+  - text: Gender*
+  - combobox "Gender": Nonbinary
+  - text: Insurance company* If your insurance is not listed, you are not eligible for care through Sharp. Contact your insurance plan to find an approved provider.
+  - combobox "Insurance company": Aetna
+  - text: Insurance policy number*
+  - button "Where can I find this information? (Open Modal)": Where can I find this information?
+  - textbox "Insurance policy number": "123456789"
+  - group:
+    - text: Are you the policyholder?* The policyholder purchased and owns the insurance policy.
+    - radio "Yes" [checked]
+    - text: Yes*
+    - radio "No"
+    - text: No*
+  - button "Continue"
+- contentinfo:
+  - navigation:
+    - heading "Need help?" [level=3]
+    - list:
+      - listitem:
+        - link "Contact us":
+          - /url: https://sharp.com/contact-us
+      - listitem:
+        - link "1-800-827-4277":
+          - /url: tel:+18008274277
+        - paragraph:
+          - text: Monday to Friday, 8 am to 5 pm View
+          - link "phone directory":
+            - /url: https://sharp.com/phone-numbers
+    - paragraph: Patients and families
+    - list:
+      - listitem:
+        - link "Sharp app and account":
+          - /url: https://sharp.com/app
+      - listitem:
+        - link "Visitor information":
+          - /url: https://sharp.com/visitor-information
+      - listitem:
+        - link "Billing":
+          - /url: https://sharp.com/billing
+      - listitem:
+        - link "Price transparency":
+          - /url: https://sharp.com/billing/estimate
+      - listitem:
+        - link "Help paying your bill":
+          - /url: https://sharp.com/billing/financial-assistance
+      - listitem:
+        - link "Policies and procedures":
+          - /url: https://sharp.com/policies-procedures
+      - listitem:
+        - link "View all resources":
+          - /url: https://sharp.com/resources-patients-families
+    - paragraph: Our organization
+    - list:
+      - listitem:
+        - link "About":
+          - /url: https://sharp.com/about
+      - listitem:
+        - link "Donate":
+          - /url: https://sharp.com/give/
+      - listitem:
+        - link "News":
+          - /url: https://sharp.com/health-news
+      - listitem:
+        - link "Jobs":
+          - /url: https://careers.sharp.com/
+      - listitem:
+        - link "Sharp Health Plan":
+          - /url: https://www.sharphealthplan.com/
+    - paragraph: Employees and partners
+    - list:
+      - listitem:
+        - link "Employees":
+          - /url: https://sharp.com/employees
+      - listitem:
+        - link "Physicians":
+          - /url: https://sharp.com/physicians
+      - listitem:
+        - link "Interns and fellows":
+          - /url: https://sharp.com/interns-fellows
+      - listitem:
+        - link "Instructors and students":
+          - /url: https://sharp.com/instructors-students
+      - listitem:
+        - link "Media":
+          - /url: https://sharp.com/media-center
+      - listitem:
+        - link "Vendors":
+          - /url: https://sharp.com/vendors
+      - listitem:
+        - link "Volunteers":
+          - /url: https://sharp.com/volunteers
+  - paragraph: Sharp is not-for-profit and relies on fundraising. © 2026 Sharp HealthCare. All rights reserved.
+  - link "Privacy policy":
+    - /url: https://sharp.com/policies-procedures/privacy-practices
+  - text: "|"
+  - link "Terms of use":
+    - /url: https://sharp.com/policies-procedures/terms-of-use
+```
+
+# Test source
+
+```ts
+   3 |
+   4 | test.describe('New Patient Insurance Form', () => {
+   5 |   test.beforeEach(async ({ homePage }) => {
+   6 |     // Go to home page and navigate to same-day care
+   7 |     await homePage.goto(SAME_DAY_CARE_DATA.HOME_URL);
+   8 |     await homePage.topMainNavLinks.sameDayCare.click();
+   9 |   });
+   10 |
+   11 |   test('I\'m a new patient button opens insurance form and verifies all fields', {
+   12 |     annotation: {
+   13 |       type: 'issue',
+   14 |       description: 'https://jira.example.com/browse/SHARP-1234',
+   15 |     },
+   16 |   }, async ({ sameDayCarePage, virtualCarePage, insuranceVerificationPage }) => {
+   17 |     // Navigate to Virtual Care page
+   18 |     await Promise.all([
+   19 |       sameDayCarePage.page.waitForURL(SAME_DAY_CARE_DATA.VIRTUAL_CARE_URL_REGEX),
+   20 |       sameDayCarePage.virtualCare.getStartedBtn.click(),
+   21 |     ]);
+   22 |
+   23 |     // Click 'I'm a new patient'
+   24 |     await Promise.all([
+   25 |       insuranceVerificationPage.page.waitForURL(SAME_DAY_CARE_DATA.INSURANCE_FORM.URL_REGEX),
+   26 |       virtualCarePage.newPatientBtn.click(),
+   27 |     ]);
+   28 |
+   29 |     const form = insuranceVerificationPage;
+   30 |     const data = SAME_DAY_CARE_DATA.INSURANCE_FORM;
+   31 |
+   32 |     // Verify all fields are empty and active
+   33 |     const inputs = [
+   34 |       form.firstNameInput,
+   35 |       form.lastNameInput,
+   36 |       form.birthdateInput,
+   37 |       form.insurancePolicyNumberInput,
+   38 |     ];
+   39 |
+   40 |     for (const input of inputs) {
+   41 |       await expect(input).toBeVisible();
+   42 |       await expect(input).toBeEnabled();
+   43 |       await expect(input).toHaveValue('');
+   44 |     }
+   45 |
+   46 |     // Verify placeholders
+   47 |     await expect(form.firstNameInput).toHaveAttribute('placeholder', data.PLACEHOLDERS.FIRST_NAME);
+   48 |     await expect(form.lastNameInput).toHaveAttribute('placeholder', data.PLACEHOLDERS.LAST_NAME);
+   49 |     await expect(form.birthdateInput).toHaveAttribute('placeholder', data.PLACEHOLDERS.BIRTHDATE);
+   50 |     await expect(form.insurancePolicyNumberInput).toHaveAttribute('placeholder', data.PLACEHOLDERS.INSURANCE_POLICY_NUMBER);
+   51 |
+   52 |     // Verify labels
+   53 |     await expect(form.labels.firstName).toHaveText(data.LABELS.FIRST_NAME);
+   54 |     await expect(form.labels.lastName).toHaveText(data.LABELS.LAST_NAME);
+   55 |     await expect(form.labels.birthdate).toHaveText(data.LABELS.BIRTHDATE);
+   56 |     await expect(form.labels.gender).toHaveText(data.LABELS.GENDER);
+   57 |     await expect(form.labels.insuranceCompany).toHaveText(data.LABELS.INSURANCE_COMPANY);
+   58 |     await expect(form.labels.insurancePolicyNumber).toHaveText(data.LABELS.INSURANCE_POLICY_NUMBER);
+   59 |     await expect(form.labels.policyholder).toHaveText(data.LABELS.POLICYHOLDER);
+   60 |
+   61 |     // Verify radio buttons are not preselected
+   62 |     await expect(form.policyholderYesRadio).not.toBeChecked();
+   63 |     await expect(form.policyholderNoRadio).not.toBeChecked();
+   64 |
+   65 |     // Verify dropdowns
+   66 |     const genderOptions = await form.getOptionsForDropdown(form.genderDropdown);
+   67 |     expect(genderOptions).toEqual(data.GENDER_OPTIONS);
+   68 |
+   69 |     const insuranceOptions = await form.getOptionsForDropdown(form.insuranceCompanyDropdown);
+   70 |     expect(insuranceOptions).toEqual(data.INSURANCE_OPTIONS);
+   71 |   });
+   72 |
+   73 |   // Data-Driven Testing: Test the exact same Dummy Aetna flow for every available gender!
+   74 |   const gendersToTest = SAME_DAY_CARE_DATA.INSURANCE_FORM.GENDER_OPTIONS.filter(g => g !== 'Select gender');
+   75 |
+   76 |   for (const gender of gendersToTest) {
+   77 |     test(`Negative: Dummy Aetna redirects to "We need more information" page [Gender: ${gender}]`, async ({ insuranceVerificationPage }) => {
+   78 |       // DEEP LINK: Bypass the UI navigation steps to save execution time
+   79 |       await insuranceVerificationPage.goto('https://portal.sharp.com/virtual-urgent-care/insurance');
+   80 |
+   81 |       const form = insuranceVerificationPage;
+   82 |       const invData = SAME_DAY_CARE_DATA.INSURANCE_FORM.INVALID_SUBMISSION_DATA;
+   83 |
+   84 |       // Fill the standard inputs
+   85 |       await form.firstNameInput.fill(invData.FIRST_NAME);
+   86 |       await form.lastNameInput.fill(invData.LAST_NAME);
+   87 |       await form.birthdateInput.fill(invData.BIRTHDATE);
+   88 |
+   89 |       // Select Gender dynamically using the loop variable
+   90 |       await form.genderDropdown.click();
+   91 |       await form.getOptionByName(gender).click();
+   92 |
+   93 |       // Select Insurance option
+   94 |       await form.insuranceCompanyDropdown.click();
+   95 |       await form.getOptionByName(invData.INSURANCE_COMPANY_SELECTION).click();
+   96 |
+   97 |       await form.insurancePolicyNumberInput.fill(invData.INSURANCE_POLICY_NUMBER);
+   98 |       await form.policyholderYesRadio.click();
+   99 |
+  100 |       // Submit and verify that we hit the expected "We need more information" state page
+  101 |       await form.continueButton.click();
+  102 |
+> 103 |       await expect(form.moreInformationHeading).toBeVisible({ timeout: 30000 }); // The form has a "Verifying..." spinner which is very slow in CI Docker
+      |                                                 ^ Error: expect(locator).toBeVisible()
+  104 |       await expect(form.moreInformationHeading).toHaveText(invData.EXPECTED_ERROR_HEADING);
+  105 |       await expect(form.verificationErrorText).toBeVisible();
+  106 |       await expect(form.verificationErrorText).toContainText(invData.EXPECTED_ERROR_TEXT);
+  107 |     });
+  108 |   }
+  109 | });
+  110 |
+```
