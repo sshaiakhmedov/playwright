@@ -2,9 +2,6 @@ import { test, expect } from '../../../../util/fixtures.js';
 import { SAME_DAY_CARE_DATA } from '../../../../data/sameDayCare.data.js';
 
 test.describe('New Patient Insurance Form', () => {
-  // Run these tests sequentially to prevent sharp.com form rate limiting in CI environments
-  test.describe.configure({ mode: 'serial' });
-
   test.beforeEach(async ({ homePage }) => {
     // Go to home page and navigate to same-day care
     await homePage.goto(SAME_DAY_CARE_DATA.HOME_URL);
@@ -73,40 +70,80 @@ test.describe('New Patient Insurance Form', () => {
     expect(insuranceOptions).toEqual(data.INSURANCE_OPTIONS);
   });
 
-  // Data-Driven Testing: Test the exact same Dummy Aetna flow for every available gender!
-  const gendersToTest = SAME_DAY_CARE_DATA.INSURANCE_FORM.GENDER_OPTIONS.filter(g => g !== 'Select gender');
+  const invData = SAME_DAY_CARE_DATA.INSURANCE_FORM.INVALID_SUBMISSION_DATA;
 
-  for (const gender of gendersToTest) {
-    test(`Negative: Dummy Aetna redirects to "We need more information" page [Gender: ${gender}]`, async ({ insuranceVerificationPage }) => {
-      // DEEP LINK: Bypass the UI navigation steps to save execution time
-      await insuranceVerificationPage.goto('https://portal.sharp.com/virtual-urgent-care/insurance');
+  test('Negative: Dummy Aetna redirects to "We need more information" page [Gender: Male]', async ({ insuranceVerificationPage }) => {
+    await insuranceVerificationPage.goto('https://portal.sharp.com/virtual-urgent-care/insurance');
+    const form = insuranceVerificationPage;
 
-      const form = insuranceVerificationPage;
-      const invData = SAME_DAY_CARE_DATA.INSURANCE_FORM.INVALID_SUBMISSION_DATA;
+    await form.firstNameInput.fill(invData.FIRST_NAME);
+    await form.lastNameInput.fill(invData.LAST_NAME);
+    await form.birthdateInput.fill(invData.BIRTHDATE);
 
-      // Fill the standard inputs
-      await form.firstNameInput.fill(invData.FIRST_NAME);
-      await form.lastNameInput.fill(invData.LAST_NAME);
-      await form.birthdateInput.fill(invData.BIRTHDATE);
+    await form.genderDropdown.click();
+    await form.getOptionByName('Male').click();
 
-      // Select Gender dynamically using the loop variable
-      await form.genderDropdown.click();
-      await form.getOptionByName(gender).click();
+    await form.insuranceCompanyDropdown.click();
+    await form.getOptionByName(invData.INSURANCE_COMPANY_SELECTION).click();
 
-      // Select Insurance option
-      await form.insuranceCompanyDropdown.click();
-      await form.getOptionByName(invData.INSURANCE_COMPANY_SELECTION).click();
+    await form.insurancePolicyNumberInput.fill(invData.INSURANCE_POLICY_NUMBER);
+    await form.policyholderYesRadio.click();
 
-      await form.insurancePolicyNumberInput.fill(invData.INSURANCE_POLICY_NUMBER);
-      await form.policyholderYesRadio.click();
+    await form.continueButton.click();
 
-      // Submit and verify that we hit the expected "We need more information" state page
-      await form.continueButton.click();
+    await expect(form.moreInformationHeading).toBeVisible({ timeout: 30000 });
+    await expect(form.moreInformationHeading).toHaveText(invData.EXPECTED_ERROR_HEADING);
+    await expect(form.verificationErrorText).toBeVisible();
+    await expect(form.verificationErrorText).toContainText(invData.EXPECTED_ERROR_TEXT);
+  });
 
-      await expect(form.moreInformationHeading).toBeVisible({ timeout: 30000 }); // The form has a "Verifying..." spinner which is very slow in CI Docker
-      await expect(form.moreInformationHeading).toHaveText(invData.EXPECTED_ERROR_HEADING);
-      await expect(form.verificationErrorText).toBeVisible();
-      await expect(form.verificationErrorText).toContainText(invData.EXPECTED_ERROR_TEXT);
-    });
-  }
+  test('Negative: Dummy Aetna redirects to "We need more information" page [Gender: Female]', async ({ insuranceVerificationPage }) => {
+    await insuranceVerificationPage.goto('https://portal.sharp.com/virtual-urgent-care/insurance');
+    const form = insuranceVerificationPage;
+
+    await form.firstNameInput.fill(invData.FIRST_NAME);
+    await form.lastNameInput.fill(invData.LAST_NAME);
+    await form.birthdateInput.fill(invData.BIRTHDATE);
+
+    await form.genderDropdown.click();
+    await form.getOptionByName('Female').click();
+
+    await form.insuranceCompanyDropdown.click();
+    await form.getOptionByName(invData.INSURANCE_COMPANY_SELECTION).click();
+
+    await form.insurancePolicyNumberInput.fill(invData.INSURANCE_POLICY_NUMBER);
+    await form.policyholderYesRadio.click();
+
+    await form.continueButton.click();
+
+    await expect(form.moreInformationHeading).toBeVisible({ timeout: 30000 });
+    await expect(form.moreInformationHeading).toHaveText(invData.EXPECTED_ERROR_HEADING);
+    await expect(form.verificationErrorText).toBeVisible();
+    await expect(form.verificationErrorText).toContainText(invData.EXPECTED_ERROR_TEXT);
+  });
+
+  test('Negative: Dummy Aetna redirects to "We need more information" page [Gender: Nonbinary]', async ({ insuranceVerificationPage }) => {
+    await insuranceVerificationPage.goto('https://portal.sharp.com/virtual-urgent-care/insurance');
+    const form = insuranceVerificationPage;
+
+    await form.firstNameInput.fill(invData.FIRST_NAME);
+    await form.lastNameInput.fill(invData.LAST_NAME);
+    await form.birthdateInput.fill(invData.BIRTHDATE);
+
+    await form.genderDropdown.click();
+    await form.getOptionByName('Nonbinary').click();
+
+    await form.insuranceCompanyDropdown.click();
+    await form.getOptionByName(invData.INSURANCE_COMPANY_SELECTION).click();
+
+    await form.insurancePolicyNumberInput.fill(invData.INSURANCE_POLICY_NUMBER);
+    await form.policyholderYesRadio.click();
+
+    await form.continueButton.click();
+
+    await expect(form.moreInformationHeading).toBeVisible({ timeout: 30000 });
+    await expect(form.moreInformationHeading).toHaveText(invData.EXPECTED_ERROR_HEADING);
+    await expect(form.verificationErrorText).toBeVisible();
+    await expect(form.verificationErrorText).toContainText(invData.EXPECTED_ERROR_TEXT);
+  });
 });
