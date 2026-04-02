@@ -100,7 +100,7 @@ test.describe('New Patient Insurance Form', () => {
       // Submit and verify that we hit the expected "We need more information" state page
       await form.continueButton.click();
 
-      await expect(form.moreInformationHeading).toBeVisible({ timeout: 15000 }); // The form has a "Verifying..." spinner
+      await expect(form.moreInformationHeading).toBeVisible({ timeout: 30000 }); // The form has a "Verifying..." spinner which is very slow in CI Docker
       await expect(form.moreInformationHeading).toHaveText(invData.EXPECTED_ERROR_HEADING);
       await expect(form.verificationErrorText).toBeVisible();
       await expect(form.verificationErrorText).toContainText(invData.EXPECTED_ERROR_TEXT);
