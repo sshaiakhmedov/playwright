@@ -2,6 +2,9 @@ import { test, expect } from '../../../../util/fixtures.js';
 import { SAME_DAY_CARE_DATA } from '../../../../data/sameDayCare.data.js';
 
 test.describe('New Patient Insurance Form', () => {
+  // Run these tests sequentially to prevent sharp.com form rate limiting in CI environments
+  test.describe.configure({ mode: 'serial' });
+
   test.beforeEach(async ({ homePage }) => {
     // Go to home page and navigate to same-day care
     await homePage.goto(SAME_DAY_CARE_DATA.HOME_URL);
